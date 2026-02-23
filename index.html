@@ -21,9 +21,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Относительный путь к CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Жёсткое исправление ширины поиска и курсор для логотипа -->
+    <!-- Жёсткие стили для формы поиска на мобильных -->
     <style>
         .logo {
             cursor: pointer;
@@ -36,6 +37,7 @@
                 margin-left: auto !important;
                 margin-right: auto !important;
                 padding: 0 !important;
+                background: transparent !important;
             }
             .hero__content .search-form,
             .search-form {
@@ -81,8 +83,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Шапка -->
     <header class="header">
         <div class="container">
             <div class="header__inner">
@@ -109,7 +109,6 @@
         </div>
     </header>
 
-    <!-- Hero-блок с поиском -->
     <section class="hero">
         <div class="hero__slider" style="background-image: url('images/Glava.jpg');">
             <div class="container">
@@ -415,13 +414,11 @@
         </div>
     </section>
 
-    <!-- Кнопки навигации -->
     <div class="back-nav">
         <a href="index.html" class="btn btn--small"><i class="fas fa-home"></i> На главную</a>
         <button onclick="history.back()" class="btn btn--small">← Назад</button>
     </div>
 
-    <!-- Футер -->
     <footer class="footer">
         <div class="container">
             <div class="trust-icons">
@@ -434,22 +431,22 @@
         </div>
     </footer>
 
-    <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper('.mySwiper', {
             loop: true,
-            autoplay: { delay: 3000 },
+            autoplay: { delay: 3000, disableOnInteraction: false },
             pagination: { el: '.swiper-pagination', clickable: true },
             navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         });
     </script>
 
-    <!-- Leaflet карта -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         var map = L.map('map').setView([53.9, 27.5667], 6);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; CartoDB'
+        }).addTo(map);
         var locations = [
             { coords: [53.9, 27.5667], name: 'Минск', url: 'https://www.aviasales.by/search/MSQ?marker=704140.minsk_map' },
             { coords: [55.18, 30.21], name: 'Витебск', url: 'https://www.aviasales.by/search/VTB?marker=704140.vitebsk_map' },
@@ -466,7 +463,6 @@
         });
     </script>
 
-    <!-- Скрипт для подсказок и динамических событий -->
     <script>
         // Подсказки для поля "Куда"
         const popularDestinations = ["Москва","Санкт-Петербург","Стамбул","Дубай","Калининград","Тбилиси","Хургада","Анталия"];
@@ -487,7 +483,7 @@
             if (!input.contains(e.target) && !suggestionsBox.contains(e.target)) suggestionsBox.style.display = 'none';
         });
 
-        // Динамические даты событий
+        // Динамические даты для событий
         (function() {
             const container = document.getElementById('index-events');
             if (!container) return;
