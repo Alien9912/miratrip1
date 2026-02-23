@@ -6,16 +6,57 @@
     <title>Древние города Беларуси | MiraTrip</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .century-badge { display: inline-block; background: #2c3e50; color: #fff; padding: 5px 15px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; }
-        .timeline { display: flex; flex-wrap: wrap; justify-content: space-between; margin: 40px 0; }
-        .timeline-item { flex: 1; min-width: 150px; text-align: center; padding: 15px; background: #fff; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin: 0 5px; }
-        .timeline-year { font-size: 1.8rem; font-weight: 700; color: #e67e22; }
-        .timeline-city { font-weight: 600; color: #2c3e50; }
-        @media (max-width: 768px) { .timeline-item { margin-bottom: 10px; } }
+        .century-badge {
+            display: inline-block;
+            background: #2c3e50;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .timeline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        .timeline-item {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 15px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 0 5px;
+        }
+        .timeline-year {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e67e22;
+        }
+        .timeline-city {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .city-card .card-footer {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+        .city-actions {
+            display: flex;
+            gap: 10px;
+        }
+        @media (max-width: 768px) {
+            .timeline-item { margin-bottom: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -81,15 +122,150 @@
         <div class="container">
             <h2 class="section__title">Сокровища белорусской истории</h2>
             <div class="cards-grid">
-                <div class="destination-card"><img src="../images/polotsk.jpg" class="card-img"><div class="card-content"><span class="century-badge">862</span><h3>Полоцк</h3><p>Софийский собор XI века, древнейший город.</p><div class="card-footer"><span class="card-price">от 65 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
-                <div class="destination-card"><img src="../images/vitebsk.jpg" class="card-img"><div class="card-content"><span class="century-badge">974</span><h3>Витебск</h3><p>Родина Марка Шагала, ратуша.</p><div class="card-footer"><span class="card-price">от 55 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
-                <div class="destination-card"><img src="../images/turov.jpg" class="card-img"><div class="card-content"><span class="century-badge">980</span><h3>Туров</h3><p>Древний крест, Туровское Евангелие.</p><div class="card-footer"><span class="card-price">от 55 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
-                <div class="destination-card"><img src="../images/grodno.jpg" class="card-img"><div class="card-content"><span class="century-badge">XII век</span><h3>Гродно</h3><p>Коложская церковь с голосниками.</p><div class="card-footer"><span class="card-price">от 60 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
-                <div class="destination-card"><img src="../images/brest.jpg" class="card-img"><div class="card-content"><span class="century-badge">1019</span><h3>Брест</h3><p>Брестская крепость, пешеходная улица.</p><div class="card-footer"><span class="card-price">от 50 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
-                <div class="destination-card"><img src="../images/novogrudok.jpg" class="card-img"><div class="card-content"><span class="century-badge">XIII век</span><h3>Новогрудок</h3><p>Первая столица ВКЛ, руины замка.</p><div class="card-footer"><span class="card-price">от 55 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
-                <div class="destination-card"><img src="../images/pinsk.jpg" class="card-img"><div class="card-content"><span class="century-badge">1097</span><h3>Пинск</h3><p>«Полесская Венеция», иезуитский коллегиум.</p><div class="card-footer"><span class="card-price">от 45 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
-                <div class="destination-card"><img src="../images/zaslavl.jpg" class="card-img"><div class="card-content"><span class="century-badge">985</span><h3>Заславль</h3><p>Городище «Замэчек».</p><div class="card-footer"><span class="card-price">от 45 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
-                <div class="destination-card"><img src="../images/mogilev.jpg" class="card-img"><div class="card-content"><span class="century-badge">1267</span><h3>Могилёв</h3><p>Ратуша, площадь Звёзд.</p><div class="card-footer"><span class="card-price">от 50 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <!-- Полоцк -->
+                <div class="destination-card city-card">
+                    <img src="../images/polotsk.jpg" class="card-img" alt="Полоцк">
+                    <div class="card-content">
+                        <span class="century-badge">862</span>
+                        <h3 class="card-title">Полоцк</h3>
+                        <p class="card-desc">Софийский собор XI века, древнейший город.</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 65 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Полоцк&aid=704140&subid=polotsk_hotels" target="_blank" class="btn" style="padding: 8px 12px;">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Полоцк&marker=704140&subid=polotsk_excursions" target="_blank" class="btn btn--small" style="padding: 8px 12px;">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Витебск -->
+                <div class="destination-card city-card">
+                    <img src="../images/vitebsk.jpg" class="card-img" alt="Витебск">
+                    <div class="card-content">
+                        <span class="century-badge">974</span>
+                        <h3 class="card-title">Витебск</h3>
+                        <p class="card-desc">Родина Марка Шагала, ратуша.</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 55 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Витебск&aid=704140&subid=vitebsk_hotels" target="_blank" class="btn">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Витебск&marker=704140&subid=vitebsk_excursions" target="_blank" class="btn btn--small">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Туров -->
+                <div class="destination-card city-card">
+                    <img src="../images/turov.jpg" class="card-img" alt="Туров">
+                    <div class="card-content">
+                        <span class="century-badge">980</span>
+                        <h3 class="card-title">Туров</h3>
+                        <p class="card-desc">Древний крест, Туровское Евангелие.</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 55 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Туров&aid=704140&subid=turov_hotels" target="_blank" class="btn">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Туров&marker=704140&subid=turov_excursions" target="_blank" class="btn btn--small">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Гродно -->
+                <div class="destination-card city-card">
+                    <img src="../images/grodno.jpg" class="card-img" alt="Гродно">
+                    <div class="card-content">
+                        <span class="century-badge">XII век</span>
+                        <h3 class="card-title">Гродно</h3>
+                        <p class="card-desc">Коложская церковь с голосниками.</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 60 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Гродно&aid=704140&subid=grodno_hotels" target="_blank" class="btn">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Гродно&marker=704140&subid=grodno_excursions" target="_blank" class="btn btn--small">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Брест -->
+                <div class="destination-card city-card">
+                    <img src="../images/brest.jpg" class="card-img" alt="Брест">
+                    <div class="card-content">
+                        <span class="century-badge">1019</span>
+                        <h3 class="card-title">Брест</h3>
+                        <p class="card-desc">Брестская крепость, пешеходная улица.</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 50 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Брест&aid=704140&subid=brest_hotels" target="_blank" class="btn">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Брест&marker=704140&subid=brest_excursions" target="_blank" class="btn btn--small">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Новогрудок -->
+                <div class="destination-card city-card">
+                    <img src="../images/novogrudok.jpg" class="card-img" alt="Новогрудок">
+                    <div class="card-content">
+                        <span class="century-badge">XIII век</span>
+                        <h3 class="card-title">Новогрудок</h3>
+                        <p class="card-desc">Первая столица ВКЛ, руины замка.</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 55 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Новогрудок&aid=704140&subid=novogrudok_hotels" target="_blank" class="btn">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Новогрудок&marker=704140&subid=novogrudok_excursions" target="_blank" class="btn btn--small">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Пинск -->
+                <div class="destination-card city-card">
+                    <img src="../images/pinsk.jpg" class="card-img" alt="Пинск">
+                    <div class="card-content">
+                        <span class="century-badge">1097</span>
+                        <h3 class="card-title">Пинск</h3>
+                        <p class="card-desc">«Полесская Венеция», иезуитский коллегиум.</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 45 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Пинск&aid=704140&subid=pinsk_hotels" target="_blank" class="btn">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Пинск&marker=704140&subid=pinsk_excursions" target="_blank" class="btn btn--small">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Заславль -->
+                <div class="destination-card city-card">
+                    <img src="../images/zaslavl.jpg" class="card-img" alt="Заславль">
+                    <div class="card-content">
+                        <span class="century-badge">985</span>
+                        <h3 class="card-title">Заславль</h3>
+                        <p class="card-desc">Городище «Замэчек».</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 45 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Заславль&aid=704140&subid=zaslavl_hotels" target="_blank" class="btn">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Заславль&marker=704140&subid=zaslavl_excursions" target="_blank" class="btn btn--small">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Могилёв -->
+                <div class="destination-card city-card">
+                    <img src="../images/mogilev.jpg" class="card-img" alt="Могилёв">
+                    <div class="card-content">
+                        <span class="century-badge">1267</span>
+                        <h3 class="card-title">Могилёв</h3>
+                        <p class="card-desc">Ратуша, площадь Звёзд.</p>
+                        <div class="card-footer">
+                            <span class="card-price">от 50 BYN</span>
+                            <div class="city-actions">
+                                <a href="https://www.booking.com/searchresults.ru.html?ss=Могилёв&aid=704140&subid=mogilev_hotels" target="_blank" class="btn">Отели</a>
+                                <a href="https://sputnik8.com/ru/search?q=Могилёв&marker=704140&subid=mogilev_excursions" target="_blank" class="btn btn--small">Экскурсии</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -101,7 +277,13 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2025 MiraTrip. Все права защищены.</p>
+            <div class="trust-icons">
+                <span class="trust-item"><i class="fas fa-shield-alt"></i> Без скрытых комиссий</span>
+                <span class="trust-item"><i class="fas fa-handshake"></i> Проверенные партнёры</span>
+                <span class="trust-item"><i class="fas fa-clock"></i> Актуальные цены</span>
+            </div>
+            <p class="disclaimer">Мы не являемся туроператором. Все бронирования осуществляются через партнёрские сервисы.</p>
+            <p class="footer-copy">© 2026 MiraTrip. Все права защищены.</p>
         </div>
     </footer>
 

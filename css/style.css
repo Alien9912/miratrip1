@@ -34,38 +34,12 @@ body {
 }
 
 .logo {
-    position: relative;
-    cursor: pointer;
-    user-select: none;
     font-size: 1.5rem;
     font-weight: bold;
     color: #2c3e50;
-    display: inline-block;
 }
 .logo span {
     color: #e67e22;
-}
-
-.logo.clicked::after {
-    content: '\f072';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #e67e22;
-    font-size: 1.8rem;
-    animation: flyThrough 2s ease-in-out forwards;
-    pointer-events: none;
-    z-index: 10;
-}
-
-@keyframes flyThrough {
-    0% { left: 0; transform: translateY(-50%) scale(0); opacity: 0; }
-    10% { transform: translateY(-50%) scale(1); opacity: 1; }
-    90% { transform: translateY(-50%) scale(1); opacity: 1; }
-    100% { left: 100%; transform: translateY(-50%) translateX(-100%) scale(0); opacity: 0; }
 }
 
 .nav__list {
@@ -80,9 +54,13 @@ body {
     font-weight: 500;
     transition: color 0.3s;
 }
-.nav__link:hover,
-.nav__link.active {
+.nav__link:hover {
     color: #e67e22;
+}
+.nav__link.active {
+    color: #2c3e50;
+    font-weight: 700;
+    border-bottom: 2px solid #3498db;
 }
 
 .burger {
@@ -143,7 +121,7 @@ body {
     color: #fff;
 }
 .hero__title {
-    font-family: 'Playfair Display', 'Montserrat', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 3rem;
     margin-bottom: 20px;
     font-weight: 700;
@@ -155,7 +133,7 @@ body {
     color: #fff;
 }
 
-/* Форма поиска и подсказки */
+/* Поиск */
 .search-container {
     position: relative;
     max-width: 600px;
@@ -174,7 +152,6 @@ body {
     border-radius: 5px;
     font-size: 1rem;
     outline: none;
-    width: 100%;
 }
 .search-form__btn {
     padding: 12px 25px;
@@ -212,9 +189,6 @@ body {
     transition: background 0.2s;
     border-bottom: 1px solid #f0f0f0;
 }
-.suggestions-box div:last-child {
-    border-bottom: none;
-}
 .suggestions-box div:hover {
     background: #e67e22;
     color: white;
@@ -233,9 +207,6 @@ body {
     font-size: 2rem;
     color: #2c3e50;
 }
-.section__title span {
-    color: #e67e22;
-}
 .price-note {
     font-size: 0.9rem;
     color: #7f8c8d;
@@ -243,20 +214,19 @@ body {
     margin-top: 20px;
 }
 
-/* Сетка карточек */
+/* Карточки */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 40px;
 }
-
 .destination-card {
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s, box-shadow 0.3s;
     text-decoration: none;
     color: inherit;
     display: block;
@@ -269,7 +239,7 @@ body {
     width: 100%;
     height: 220px;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s;
 }
 .destination-card:hover .card-img {
     transform: scale(1.05);
@@ -292,7 +262,8 @@ body {
     margin-bottom: 12px;
 }
 .card-location i {
-    color: #e67e22;
+    color: #7f8c8d;
+    font-size: 0.8rem;
 }
 .card-desc {
     color: #555;
@@ -308,29 +279,52 @@ body {
 }
 .card-price {
     font-weight: 700;
-    color: #e67e22;
+    color: #2c3e50;
     font-size: 1.2rem;
 }
-.card-btn {
-    background: #e67e22;
+.card-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+}
+.stars {
+    color: #f39c12;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+.reviews {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+}
+
+/* Кнопки действий (главные) */
+.card-btn, .cta-button, .tour-btn {
+    background: linear-gradient(90deg, #ff7f50, #ff5722);
     color: #fff;
     padding: 8px 20px;
     border-radius: 30px;
-    transition: background 0.3s;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(255,87,34,0.3);
+    transition: all 0.3s;
     text-decoration: none;
     display: inline-block;
+    cursor: pointer;
+    border: none;
 }
-.card-btn:hover {
-    background: #d35400;
+.card-btn:hover, .cta-button:hover, .tour-btn:hover {
+    background: #ff5722;
+    box-shadow: 0 6px 15px rgba(255,87,34,0.5);
+    transform: translateY(-2px);
 }
 
-/* Карточка тура / спецпредложения (Tour Card) */
+/* Спецпредложения (карточки) */
 .tour-card {
     background: linear-gradient(145deg, #ffffff, #f5f5f5);
     border-radius: 24px;
     padding: 20px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    transition: all 0.3s;
     position: relative;
     overflow: hidden;
 }
@@ -341,7 +335,7 @@ body {
     left: 0;
     width: 100%;
     height: 5px;
-    background: linear-gradient(90deg, #e67e22, #f39c12);
+    background: linear-gradient(90deg, #ff7f50, #ff5722);
 }
 .tour-card:hover {
     transform: scale(1.02);
@@ -351,7 +345,7 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: #e67e22;
+    background: #ff5722;
     color: #fff;
     padding: 5px 15px;
     border-radius: 30px;
@@ -379,10 +373,9 @@ body {
     margin-bottom: 15px;
     color: #7f8c8d;
     font-size: 0.9rem;
-    flex-wrap: wrap;
 }
 .tour-meta i {
-    color: #e67e22;
+    color: #7f8c8d;
     margin-right: 5px;
 }
 .tour-price-block {
@@ -390,18 +383,15 @@ body {
     align-items: baseline;
     gap: 10px;
     margin-bottom: 20px;
-    flex-wrap: wrap;
 }
 .tour-price-old {
     color: #bdc3c7;
     text-decoration: line-through;
-    font-size: 1rem;
 }
 .tour-price-new {
-    color: #e67e22;
+    color: #ff5722;
     font-size: 1.8rem;
     font-weight: 700;
-    line-height: 1;
 }
 .tour-price-new small {
     font-size: 0.9rem;
@@ -411,20 +401,16 @@ body {
 .tour-btn {
     display: block;
     width: 100%;
-    background: #2c3e50;
-    color: #fff;
     text-align: center;
     padding: 12px;
     border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s;
-}
-.tour-btn:hover {
-    background: #1a2632;
 }
 
-/* Карточка события (Event Card) */
+/* События */
+.events {
+    max-width: 800px;
+    margin: 0 auto;
+}
 .event-card {
     display: flex;
     align-items: center;
@@ -434,13 +420,13 @@ body {
     margin-bottom: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     transition: box-shadow 0.3s;
-    border-left: 5px solid #e67e22;
+    border-left: 5px solid #3498db;
 }
 .event-card:hover {
-    box-shadow: 0 10px 30px rgba(230,126,34,0.15);
+    box-shadow: 0 10px 30px rgba(52,152,219,0.15);
 }
 .event-date {
-    background: #e67e22;
+    background: #3498db;
     color: #fff;
     min-width: 80px;
     height: 80px;
@@ -475,11 +461,11 @@ body {
     margin-bottom: 5px;
 }
 .event-info p i {
-    color: #e67e22;
+    color: #3498db;
     width: 20px;
 }
 .event-link {
-    color: #e67e22;
+    color: #2c3e50;
     text-decoration: none;
     font-weight: 600;
     display: inline-flex;
@@ -491,7 +477,7 @@ body {
     gap: 10px;
 }
 
-/* Блок фактов */
+/* Факты */
 .fact-block {
     background: linear-gradient(135deg, #f5f0e6, #e8d9c5);
     border-left: 5px solid #e67e22;
@@ -502,7 +488,7 @@ body {
     transition: opacity 0.5s;
 }
 .fact-block i {
-    color: #e67e22;
+    color: #2c3e50;
     font-size: 2rem;
     margin-right: 15px;
     float: left;
@@ -510,7 +496,7 @@ body {
 .fact-block.fade-out { opacity: 0; }
 .fact-block.fade-in { opacity: 1; }
 
-/* Слайдер (Swiper) */
+/* Слайдер */
 .swiper {
     width: 100%;
     height: 400px;
@@ -530,7 +516,7 @@ body {
     color: #e67e22;
 }
 
-/* НОВЫЙ БЛОК: Отзывы */
+/* Отзывы */
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -542,7 +528,7 @@ body {
     border-radius: 20px;
     padding: 30px 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s;
 }
 .testimonial-card:hover {
     transform: translateY(-5px);
@@ -553,7 +539,7 @@ body {
     margin-bottom: 20px;
 }
 .testimonial-content i {
-    color: #e67e22;
+    color: #3498db;
     font-size: 2rem;
     opacity: 0.3;
     position: absolute;
@@ -573,7 +559,7 @@ body {
     text-align: right;
 }
 
-/* НОВЫЙ БЛОК: Преимущества */
+/* Преимущества */
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -586,28 +572,28 @@ body {
     padding: 30px 20px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s;
 }
 .benefit-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 .benefit-icon {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    margin-bottom: 15px;
 }
 .benefit-title {
     font-size: 1.3rem;
-    font-weight: 600;
     margin-bottom: 10px;
+    font-weight: 600;
     color: #2c3e50;
 }
 .benefit-description {
-    color: #7f8c8d;
+    color: #666;
     font-size: 0.95rem;
 }
 
-/* НОВЫЙ БЛОК: FAQ */
+/* FAQ */
 .faq-grid {
     max-width: 800px;
     margin: 0 auto;
@@ -634,7 +620,7 @@ body {
     line-height: 1.6;
 }
 
-/* НОВЫЙ БЛОК: Контакты */
+/* Контакты */
 .contact {
     background: linear-gradient(135deg, #2c3e50, #1a2632);
     color: #fff;
@@ -649,7 +635,7 @@ body {
     margin-top: 20px;
 }
 .contact-text a {
-    color: #e67e22;
+    color: #ff7f50;
     text-decoration: none;
     font-weight: 600;
 }
@@ -657,13 +643,18 @@ body {
     text-decoration: underline;
 }
 
-/* Кнопки навигации */
+/* Кнопки навигации (второстепенные) */
 .back-nav {
     text-align: center;
     margin: 30px 0;
 }
 .back-nav .btn {
+    background: #e67e22;
+    color: #fff;
     margin: 0 5px;
+}
+.back-nav .btn:hover {
+    background: #d35400;
 }
 
 /* Футер */
@@ -688,7 +679,7 @@ body {
     gap: 8px;
 }
 .trust-item i {
-    color: #e67e22;
+    color: #ff7f50;
     font-size: 1.2rem;
 }
 .disclaimer {
@@ -703,7 +694,7 @@ body {
     color: #7f8fa6;
 }
 
-/* Мобильная адаптация */
+/* Мобильное меню и адаптация */
 @media (max-width: 768px) {
     .nav {
         position: fixed;
@@ -734,170 +725,19 @@ body {
         margin-bottom: 15px;
         margin-right: 0;
     }
-    .tour-title {
-        padding-right: 0;
-    }
-    .tour-badge {
-        position: static;
-        display: inline-block;
-        margin-bottom: 10px;
-    }
     .swiper {
         height: 250px;
     }
-
-    /* Компактная форма поиска */
-    .hero__content {
-        padding: 20px 10px;
-    }
-    .search-container {
-        max-width: 260px !important;
-        margin: 0 auto !important;
-    }
-    .search-form {
+    .card-footer {
         flex-direction: column;
-        gap: 5px !important;
+        align-items: stretch;
+        gap: 10px;
     }
-    .search-form__input,
-    .search-form__btn {
-        width: 100% !important;
-        padding: 8px 12px !important;
-        font-size: 0.9rem !important;
-        height: 38px !important;
+    .card-price {
+        text-align: center;
     }
-    .hero__title {
-        font-size: 2rem !important;
-        margin-bottom: 5px !important;
-        line-height: 1.2 !important;
-    }
-    .hero__subtitle {
-        font-size: 1rem !important;
-        margin-bottom: 10px !important;
-    }
-
-    .cards-grid {
-        gap: 15px;
-    }
-    .destination-card .card-content {
-        padding: 15px;
-    }
-    .destination-card .card-title {
-        font-size: 1.3rem;
-    }
-    .testimonials-grid,
-    .benefits-grid {
-        gap: 20px;
-    }
-    .trust-icons {
-        gap: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero__title {
-        font-size: 1.6rem !important;
-    }
-    .hero__subtitle {
-        font-size: 0.9rem !important;
-    }
-    .search-container {
-        max-width: 220px !important;
-    }
-    .search-form__input,
-    .search-form__btn {
-        padding: 6px 10px !important;
-        font-size: 0.85rem !important;
-        height: 34px !important;
-    }
-    .section__title {
-        font-size: 1.5rem;
-    }
-}
-
-/* Стили для рейтингов */
-.card-rating {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 10px 0;
-}
-.stars {
-    color: #f1c40f;
-    font-size: 1rem;
-    letter-spacing: 2px;
-}
-.reviews {
-    color: #7f8c8d;
-    font-size: 0.85rem;
-}
-
-/* Усиление кнопок */
-.card-btn, .cta-button, .tour-btn {
-    background: #e67e22 !important;
-    color: white !important;
-    padding: 10px 25px !important;
-    border-radius: 30px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    box-shadow: 0 4px 12px rgba(230,126,34,0.4) !important;
-    transition: all 0.3s !important;
-    border: none !important;
-}
-.card-btn:hover, .cta-button:hover, .tour-btn:hover {
-    background: #d35400 !important;
-    box-shadow: 0 6px 16px rgba(230,126,34,0.6) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* Стиль для даты в статьях */
-.article-date {
-    color: #7f8c8d;
-    margin-bottom: 20px;
-    font-style: italic;
-}
-
-/* Жёсткая фиксация ширины формы поиска на мобильных */
-@media (max-width: 768px) {
-    .hero__content .search-container {
-        max-width: 280px !important;
-        width: 100% !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        padding: 0 !important;
-    }
-    .hero__content .search-form {
-        flex-direction: column !important;
-        gap: 5px !important;
-    }
-    .hero__content .search-form__input,
-    .hero__content .search-form__btn {
-        width: 100% !important;
-        padding: 8px 12px !important;
-        font-size: 0.9rem !important;
-        box-sizing: border-box !important;
-        border-radius: 5px !important;
-    }
-    .hero__content .search-form__btn {
-        background: #e67e22 !important;
-        color: #fff !important;
-        font-weight: 600 !important;
-    }
-    /* Убираем возможные лишние отступы у родительских контейнеров */
-    .hero__content {
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
-}
-
-/* Для очень маленьких экранов (iPhone SE, Galaxy Fold) */
-@media (max-width: 480px) {
-    .hero__content .search-container {
-        max-width: 220px !important;
-    }
-    .hero__content .search-form__input,
-    .hero__content .search-form__btn {
-        padding: 6px 10px !important;
-        font-size: 0.85rem !important;
+    .card-btn {
+        width: 100%;
+        text-align: center;
     }
 }
