@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Готовые маршруты | MiraTrip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .route-card { background: #fff; border-radius: 20px; padding: 25px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .route-card:hover { transform: translateY(-5px); }
+        .route-title { font-size: 1.8rem; color: #2c3e50; margin-bottom: 10px; }
+        .route-meta { display: flex; gap: 20px; margin-bottom: 20px; color: #7f8c8d; flex-wrap: wrap; }
+        .route-days { display: flex; align-items: center; gap: 5px; }
+        .route-days i { color: #e67e22; }
+        .route-description { margin-bottom: 20px; line-height: 1.8; }
+        .route-btn { background: #e67e22; color: #fff; padding: 10px 25px; border-radius: 50px; text-decoration: none; display: inline-block; transition: background 0.3s; }
+        .route-btn:hover { background: #d35400; }
+        .map-placeholder { width: 100%; height: 200px; background: #ecf0f1; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; color: #7f8c8d; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="logo">Mira<span>Trip</span></div>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="../index.html" class="nav__link">Главная</a></li>
+                        <li><a href="destinations.html" class="nav__link">Направления</a></li>
+                        <li><a href="tours.html" class="nav__link">Туры и билеты</a></li>
+                        <li><a href="routes.html" class="nav__link active">Маршруты</a></li>
+                        <li><a href="events.html" class="nav__link">События</a></li>
+                        <li><a href="ancient-cities.html" class="nav__link">Древние города</a></li>
+                        <li><a href="castles.html" class="nav__link">Замки и дворцы</a></li>
+                        <li><a href="nature.html" class="nav__link">Природа</a></li>
+                        <li><a href="../blog.html" class="nav__link">Блог</a></li>
+                    </ul>
+                </nav>
+                <div class="header__actions">
+                    <button class="burger" id="burger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/routes-hero.jpg'); background-size: cover; height: 300px;">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title" style="font-size: 2.5rem;">Готовые маршруты</h1>
+                <p class="hero__subtitle">Путешествуйте по готовым планам с лучшими местами</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #fef9e7;">
+        <div class="container">
+            <div class="fact-block" style="max-width: 800px; margin: 0 auto;">
+                <i class="fas fa-scroll"></i>
+                <p class="fact-text">Загрузка интересного факта...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="route-card">
+                <h2 class="route-title">🏰 Замки Беларуси: Несвиж и Мир</h2>
+                <div class="route-meta"><span class="route-days"><i class="fas fa-clock"></i> 2 дня / 1 ночь</span><span><i class="fas fa-map-marker-alt"></i> Минская область</span><span><i class="fas fa-tag"></i> от 199 BYN</span></div>
+                <div class="map-placeholder"><i class="fas fa-map" style="margin-right: 10px;"></i> Минск → Несвиж → Мир → Минск</div>
+                <p class="route-description"><strong>День 1:</strong> Выезд из Минска. Экскурсия по Несвижскому замку. Размещение в Несвиже.<br><strong>День 2:</strong> Переезд в Мир, экскурсия по Мирскому замку. Обед в усадьбе. Возвращение.</p>
+                <a href="#" class="route-btn">Забронировать тур</a>
+            </div>
+            <div class="route-card">
+                <h2 class="route-title">🌊 Браславское кольцо</h2>
+                <div class="route-meta"><span class="route-days"><i class="fas fa-clock"></i> 3 дня / 2 ночи</span><span><i class="fas fa-map-marker-alt"></i> Витебская область</span><span><i class="fas fa-tag"></i> от 350 BYN</span></div>
+                <div class="map-placeholder"><i class="fas fa-map" style="margin-right: 10px;"></i> Браслав → оз. Дривяты → оз. Струсто → Браслав</div>
+                <p class="route-description"><strong>День 1:</strong> Прибытие в Браслав, Замковая гора. Размещение.<br><strong>День 2:</strong> Водная прогулка, каякинг, городище Масковичи.<br><strong>День 3:</strong> Обзорная башня на горе Маяк. Отъезд.</p>
+                <a href="#" class="route-btn">Забронировать тур</a>
+            </div>
+            <div class="route-card">
+                <h2 class="route-title">🌲 Выходные в Беловежской пуще</h2>
+                <div class="route-meta"><span class="route-days"><i class="fas fa-clock"></i> 2 дня / 1 ночь</span><span><i class="fas fa-map-marker-alt"></i> Брестская область</span><span><i class="fas fa-tag"></i> от 220 BYN</span></div>
+                <div class="map-placeholder"><i class="fas fa-map" style="margin-right: 10px;"></i> Брест → Каменец → Пуща → Брест</div>
+                <p class="route-description"><strong>День 1:</strong> Встреча в Бресте, Каменецкая башня. Размещение в пуще.<br><strong>День 2:</strong> Вольеры, Музей природы, экотропа. Отъезд.</p>
+                <a href="#" class="route-btn">Забронировать тур</a>
+            </div>
+            <div class="route-card">
+                <h2 class="route-title">⛪ Древние города: Полоцк и Витебск</h2>
+                <div class="route-meta"><span class="route-days"><i class="fas fa-clock"></i> 3 дня / 2 ночи</span><span><i class="fas fa-map-marker-alt"></i> Витебская область</span><span><i class="fas fa-tag"></i> от 280 BYN</span></div>
+                <div class="map-placeholder"><i class="fas fa-map" style="margin-right: 10px;"></i> Минск → Полоцк → Витебск → Минск</div>
+                <p class="route-description"><strong>День 1:</strong> Полоцк: Софийский собор, монастырь.<br><strong>День 2:</strong> Витебск: ратуша, дом Шагала.<br><strong>День 3:</strong> Летний амфитеатр. Возвращение.</p>
+                <a href="#" class="route-btn">Забронировать тур</a>
+            </div>
+            <div class="route-card">
+                <h2 class="route-title">🪐 Белорусский Марс + Солигорск</h2>
+                <div class="route-meta"><span class="route-days"><i class="fas fa-clock"></i> 1 день</span><span><i class="fas fa-map-marker-alt"></i> Минская область</span><span><i class="fas fa-tag"></i> от 75 BYN</span></div>
+                <div class="map-placeholder"><i class="fas fa-map" style="margin-right: 10px;"></i> Минск → Солигорск → терриконы → Минск</div>
+                <p class="route-description">Экскурсия к соляным отвалам, фотосессия, обед, музей истории калийного производства.</p>
+                <a href="#" class="route-btn">Забронировать экскурсию</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="back-nav">
+        <a href="../index.html" class="btn btn--small"><i class="fas fa-home"></i> На главную</a>
+        <button onclick="history.back()" class="btn btn--small">← Назад</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="disclaimer">Мы не являемся туроператором. Все бронирования осуществляются через партнёрские сервисы.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

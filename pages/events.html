@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>События | MiraTrip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Стили для карточек событий */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .event-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid #e67e22;
+            display: flex;
+            flex-direction: column;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .event-date-badge {
+            background: #e67e22;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-block;
+            align-self: flex-start;
+        }
+        .event-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .event-card p {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .event-card i {
+            color: #e67e22;
+            width: 20px;
+        }
+        .event-link {
+            color: #e67e22;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: auto;
+            transition: gap 0.3s;
+        }
+        .event-link:hover {
+            gap: 10px;
+        }
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+        }
+        .city-note {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="logo">Mira<span>Trip</span></div>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="../index.html" class="nav__link">Главная</a></li>
+                        <li><a href="destinations.html" class="nav__link">Направления</a></li>
+                        <li><a href="tours.html" class="nav__link">Туры и билеты</a></li>
+                        <li><a href="routes.html" class="nav__link">Маршруты</a></li>
+                        <li><a href="events.html" class="nav__link active">События</a></li>
+                        <li><a href="ancient-cities.html" class="nav__link">Древние города</a></li>
+                        <li><a href="castles.html" class="nav__link">Замки и дворцы</a></li>
+                        <li><a href="nature.html" class="nav__link">Природа</a></li>
+                        <li><a href="../blog.html" class="nav__link">Блог</a></li>
+                    </ul>
+                </nav>
+                <div class="header__actions">
+                    <button class="burger" id="burger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero-блок -->
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/events-hero.jpg'); background-size: cover; height: 300px;">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title" style="font-size: 2.5rem;">События</h1>
+                <p class="hero__subtitle">Актуальные мероприятия и концерты</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок с меняющимися фактами -->
+    <section class="section" style="background: #fef9e7;">
+        <div class="container">
+            <div class="fact-block" style="max-width: 800px; margin: 0 auto;">
+                <i class="fas fa-scroll"></i>
+                <p class="fact-text">Загрузка интересного факта...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел с событиями через Kudago API -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Ближайшие события</h2>
+            <p class="city-note">* Показаны события Москвы (временно, так как Минск не поддерживается Kudago).</p>
+            <div id="events-container" class="events-grid">
+                <div class="loader">Загрузка событий...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Кнопки навигации -->
+    <div class="back-nav">
+        <a href="../index.html" class="btn btn--small"><i class="fas fa-home"></i> На главную</a>
+        <button onclick="history.back()" class="btn btn--small">← Назад</button>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <p class="disclaimer">Мы не являемся туроператором. Все бронирования осуществляются через партнёрские сервисы.</p>
+        </div>
+    </footer>
+
+    <!-- Скрипт для загрузки событий через Kudago API -->
+    <script>
+        async function loadEvents() {
+            const container = document.getElementById('events-container');
+            container.innerHTML = '<div class="loader">Загрузка событий...</div>';
+
+            try {
+                // Используем бесплатное API Kudago для Москвы (location=msk)
+                // Для других городов замените msk на нужный код (например, spb, kazan и т.д.)
+                const response = await fetch('https://kudago.com/public-api/v1.4/events/?location=msk&fields=title,price,dates,place,site_url&page_size=12&actual_since=' + Math.floor(Date.now() / 1000));
+                const data = await response.json();
+
+                if (data.results && data.results.length > 0) {
+                    container.innerHTML = '';
+
+                    data.results.forEach(event => {
+                        // Определяем дату начала
+                        const startDate = event.dates && event.dates[0] ? new Date(event.dates[0].start) : null;
+                        let day = '', month = '', time = '';
+                        if (startDate) {
+                            day = startDate.getDate();
+                            month = startDate.toLocaleString('ru', { month: 'long' });
+                            time = startDate.toLocaleTimeString('ru', { hour: '2-digit', minute: '2-digit' });
+                        }
+
+                        // Цена
+                        let priceText = event.price || 'Вход свободный';
+                        if (typeof priceText === 'string' && priceText.includes('бесплатно')) priceText = 'Бесплатно';
+
+                        // Место
+                        let placeName = event.place?.title || 'Место не указано';
+
+                        // Ссылка на событие
+                        let eventUrl = event.site_url || '#';
+
+                        const card = document.createElement('div');
+                        card.className = 'event-card';
+                        card.innerHTML = `
+                            ${startDate ? `<div class="event-date-badge">${day} ${month}</div>` : ''}
+                            <h3>${event.title}</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> ${placeName}</p>
+                            ${time ? `<p><i class="fas fa-clock"></i> ${time}</p>` : ''}
+                            <p><i class="fas fa-tag"></i> ${priceText}</p>
+                            <a href="${eventUrl}" target="_blank" class="event-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                        `;
+                        container.appendChild(card);
+                    });
+                } else {
+                    container.innerHTML = '<p style="text-align:center">Событий пока нет.</p>';
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки событий:', error);
+                container.innerHTML = '<p class="error-message">Не удалось загрузить события. Попробуйте позже.</p>';
+            }
+        }
+
+        loadEvents();
+    </script>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

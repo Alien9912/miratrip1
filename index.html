@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Код подтверждения Travelpayouts (не удаляйте) -->
+    <script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">
+        (function () {
+            var script = document.createElement("script");
+            script.async = 1;
+            script.src = 'https://emrld.cc/NDk5NDI3.js?t=499427';
+            document.head.appendChild(script);
+        })();
+    </script>
+
+    <title>MiraTrip - путешествия, которые остаются в сердце</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- 🔧 Жёсткое исправление ширины формы поиска на мобильных -->
+    <style>
+        @media (max-width: 768px) {
+            .hero__content .search-container,
+            .search-container {
+                max-width: 280px !important;
+                width: 100% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                padding: 0 !important;
+            }
+            .hero__content .search-form,
+            .search-form {
+                flex-direction: column !important;
+                gap: 5px !important;
+                width: 100% !important;
+            }
+            .hero__content .search-form__input,
+            .hero__content .search-form__btn,
+            .search-form__input,
+            .search-form__btn {
+                width: 100% !important;
+                min-width: 0 !important;
+                padding: 8px 12px !important;
+                font-size: 0.9rem !important;
+                box-sizing: border-box !important;
+                border-radius: 5px !important;
+            }
+            .hero__content .search-form__btn,
+            .search-form__btn {
+                background: #e67e22 !important;
+                color: #fff !important;
+                font-weight: 600 !important;
+            }
+            .hero__content {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero__content .search-container,
+            .search-container {
+                max-width: 220px !important;
+            }
+            .hero__content .search-form__input,
+            .hero__content .search-form__btn,
+            .search-form__input,
+            .search-form__btn {
+                padding: 6px 10px !important;
+                font-size: 0.85rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="logo">Mira<span>Trip</span></div>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="index.html" class="nav__link active">Главная</a></li>
+                        <li><a href="pages/destinations.html" class="nav__link">Направления</a></li>
+                        <li><a href="pages/tours.html" class="nav__link">Туры и билеты</a></li>
+                        <li><a href="pages/routes.html" class="nav__link">Маршруты</a></li>
+                        <li><a href="pages/events.html" class="nav__link">События</a></li>
+                        <li><a href="pages/ancient-cities.html" class="nav__link">Древние города</a></li>
+                        <li><a href="pages/castles.html" class="nav__link">Замки и дворцы</a></li>
+                        <li><a href="pages/nature.html" class="nav__link">Природа</a></li>
+                        <li><a href="blog.html" class="nav__link">Блог</a></li>
+                    </ul>
+                </nav>
+                <div class="header__actions">
+                    <button class="burger" id="burger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero-блок с поиском (фон Glava.jpg) -->
+    <section class="hero">
+        <div class="hero__slider" style="background-image: url('images/Glava.jpg');">
+            <div class="container">
+                <div class="hero__content">
+                    <h1 class="hero__title">MiraTrip - путешествия, <br>которые остаются в сердце</h1>
+                    <p class="hero__subtitle">Путешествия по Беларуси и за её пределы</p>
+                    <div class="search-container">
+                        <form class="search-form" action="https://www.aviasales.by/search" method="get" target="_blank">
+                            <input type="hidden" name="marker" value="704140">
+                            <input type="hidden" name="subid" value="main_search">
+                            <input type="text" class="search-form__input" name="origin" placeholder="Откуда" value="Минск">
+                            <input type="text" class="search-form__input" id="destination-input" name="destination" placeholder="Куда" autocomplete="off">
+                            <button type="submit" class="search-form__btn">Найти</button>
+                        </form>
+                        <div id="suggestions" class="suggestions-box"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Популярные направления – 8 карточек с рейтингами -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Популярные направления</h2>
+            <div class="cards-grid">
+                <!-- Москва -->
+                <a href="https://www.aviasales.by/search/MSQMOW1?marker=704140.moscow_flights" target="_blank" class="destination-card">
+                    <img src="images/Moscow.jpg" alt="Москва" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Москва</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Россия</div>
+                        <p class="card-desc">Столица России — от Кремля до современных небоскрёбов Москва-Сити.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="reviews">(24 отзыва)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">от 150 BYN</span>
+                            <span class="card-btn">Найти билеты</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Санкт-Петербург -->
+                <a href="https://www.aviasales.by/search/MSQLED1?marker=704140.spb_flights" target="_blank" class="destination-card">
+                    <img src="images/Piterburg.jpg" alt="Санкт-Петербург" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Санкт-Петербург</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Россия</div>
+                        <p class="card-desc">Северная столица, Эрмитаж, разводные мосты и белые ночи.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="reviews">(37 отзывов)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">от 180 BYN</span>
+                            <span class="card-btn">Найти билеты</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Стамбул -->
+                <a href="https://www.aviasales.by/search/MSQIST1?marker=704140.istanbul_flights" target="_blank" class="destination-card">
+                    <img src="images/Stambul.jpg" alt="Стамбул" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Стамбул</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Турция</div>
+                        <p class="card-desc">Город на стыке Европы и Азии, где Восток встречается с Западом.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="reviews">(19 отзывов)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">от 600 BYN</span>
+                            <span class="card-btn">Найти билеты</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Дубай -->
+                <a href="https://www.aviasales.by/search/MSQDXB1?marker=704140.dubai_flights" target="_blank" class="destination-card">
+                    <img src="images/Dubai.jpg" alt="Дубай" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Дубай</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> ОАЭ</div>
+                        <p class="card-desc">Город футуристических небоскрёбов, золотых пляжей и шопинга.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="reviews">(42 отзыва)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">от 1000 BYN</span>
+                            <span class="card-btn">Найти билеты</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Калининград -->
+                <a href="https://www.aviasales.by/search/MSQKGD1?marker=704140.kgd_flights" target="_blank" class="destination-card">
+                    <img src="images/kaliningrad.jpg" alt="Калининград" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Калининград</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Россия</div>
+                        <p class="card-desc">Самый западный регион России, янтарь и средневековая архитектура.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="reviews">(15 отзывов)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">от 250 BYN</span>
+                            <span class="card-btn">Найти билеты</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Тбилиси -->
+                <a href="https://www.aviasales.by/search/MSQTBS1?marker=704140.tbs_flights" target="_blank" class="destination-card">
+                    <img src="images/tbilisi.jpg" alt="Тбилиси" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Тбилиси</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Грузия</div>
+                        <p class="card-desc">Древний город с тёплой атмосферой, винодельнями и гостеприимством.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="reviews">(28 отзывов)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">от 650 BYN</span>
+                            <span class="card-btn">Найти билеты</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Хургада (Египет) -->
+                <a href="https://www.aviasales.by/search/MSQHRG1?marker=704140.hurghada_flights" target="_blank" class="destination-card">
+                    <img src="images/hurgady.jpg" alt="Хургада" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Хургада</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Египет</div>
+                        <p class="card-desc">Красное море, коралловые рифы, дайвинг и пляжный отдых круглый год.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="reviews">(33 отзыва)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">от 800 BYN</span>
+                            <span class="card-btn">Найти билеты</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Анталия (Турция) -->
+                <a href="https://www.aviasales.by/search/MSQAYT1?marker=704140.antalya_flights" target="_blank" class="destination-card">
+                    <img src="images/Antaliya.jpg" alt="Анталия" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Анталия</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Турция</div>
+                        <p class="card-desc">Жемчужина турецкого побережья, отели «всё включено» и древние города.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="reviews">(56 отзывов)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">от 750 BYN</span>
+                            <span class="card-btn">Найти билеты</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <p class="price-note">Цены ориентировочные, актуальные предложения смотрите у партнёров.</p>
+        </div>
+    </section>
+
+    <!-- Блок с меняющимися фактами -->
+    <section class="section fact-section" style="background: #fef9e7;">
+        <div class="container">
+            <div class="fact-block" style="max-width: 800px; margin: 0 auto;">
+                <i class="fas fa-scroll"></i>
+                <p class="fact-text">Загрузка интересного факта...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Слайдер -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Вдохновляющие моменты</h2>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="images/Moscow.jpg" alt="Москва" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/Piterburg.jpg" alt="Санкт-Петербург" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/Stambul.jpg" alt="Стамбул" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/Dubai.jpg" alt="Дубай" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/kaliningrad.jpg" alt="Калининград" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/tbilisi.jpg" alt="Тбилиси" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/hurgady.jpg" alt="Хургада" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/Antaliya.jpg" alt="Анталия" loading="lazy"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Спецпредложения -->
+    <section class="section section--offers">
+        <div class="container">
+            <h2 class="section__title">Спецпредложения</h2>
+            <div class="cards-grid">
+                <div class="tour-card">
+                    <span class="tour-badge">Горящее</span>
+                    <img src="images/egypt.jpg" alt="Египет" class="tour-img" loading="lazy">
+                    <h3 class="tour-title">Египет, Хургада</h3>
+                    <div class="tour-meta"><span><i class="fas fa-calendar-alt"></i> 7 ночей</span><span><i class="fas fa-plane"></i> 2 мая</span></div>
+                    <div class="tour-price-block"><span class="tour-price-old">1200 BYN</span><span class="tour-price-new">750 <small>BYN</small></span></div>
+                    <a href="#" class="tour-btn">Забронировать</a>
+                </div>
+                <div class="tour-card">
+                    <span class="tour-badge">-20%</span>
+                    <img src="images/mir.jpg" alt="Мирский замок" class="tour-img" loading="lazy">
+                    <h3 class="tour-title">Экскурсия в Мирский замок</h3>
+                    <div class="tour-meta"><span><i class="fas fa-clock"></i> 1 день</span><span><i class="fas fa-bus"></i> сб, вс</span></div>
+                    <div class="tour-price-block"><span class="tour-price-old">65 BYN</span><span class="tour-price-new">52 <small>BYN</small></span></div>
+                    <a href="#" class="tour-btn">Купить билет</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ближайшие события (с динамическими датами) -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Ближайшие события</h2>
+            <div class="events">
+                <div class="event-card">
+                    <div class="event-date"><span class="day">15</span><span class="month">марта</span></div>
+                    <div class="event-info">
+                        <h4>Фестиваль «Масленица» в Дудутках</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Дудутки, Минская обл.</p>
+                    </div>
+                    <a href="#" class="event-link">Билеты <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="event-card">
+                    <div class="event-date"><span class="day">25</span><span class="month">марта</span></div>
+                    <div class="event-info">
+                        <h4>Концерт в Минской филармонии</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Минск, пл. Свободы</p>
+                    </div>
+                    <a href="#" class="event-link">Билеты <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section__title">Что говорят наши путешественники</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>Очень удобно сравнивать цены на билеты в одном месте. Нашёл отличный вариант в Стамбул дешевле, чем на других сайтах. Спасибо MiraTrip!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <span>Анна, Минск</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>Пользовался сервисом для бронирования отелей в Москве. Всё прозрачно, без скрытых комиссий. Обязательно вернусь.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <span>Дмитрий, Гродно</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>Отличные подборки направлений без визы! Уже спланировал поездку в Грузию по совету с сайта. Спасибо за вдохновение!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <span>Елена, Брест</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Почему MiraTrip -->
+    <section class="section why-us">
+        <div class="container">
+            <h2 class="section__title">Почему выбирают <span>MiraTrip</span></h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔒</div>
+                    <h3 class="benefit-title">Проверенные партнёры</h3>
+                    <p class="benefit-description">Мы работаем только с надёжными сервисами бронирования.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3 class="benefit-title">Лучшие цены</h3>
+                    <p class="benefit-description">Сравнивайте предложения и находите самые выгодные.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3 class="benefit-title">Быстро и удобно</h3>
+                    <p class="benefit-description">Один клик до бронирования.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <h3 class="benefit-title">Поддержка 24/7</h3>
+                    <p class="benefit-description">Всегда готовы помочь.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq">
+        <div class="container">
+            <h2 class="section__title">Часто задаваемые вопросы</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4 class="faq-question">1. Как происходит бронирование?</h4>
+                    <p class="faq-answer">Все бронирования проходят через наших партнёров. MiraTrip помогает сравнить и выбрать лучшие варианты.</p>
+                </div>
+                <div class="faq-item">
+                    <h4 class="faq-question">2. Есть ли скрытые комиссии?</h4>
+                    <p class="faq-answer">Нет. Мы показываем только официальные цены партнёров.</p>
+                </div>
+                <div class="faq-item">
+                    <h4 class="faq-question">3. Можно ли отменить заказ?</h4>
+                    <p class="faq-answer">Условия зависят от конкретного партнёра. Мы всегда указываем ссылку на правила отмены.</p>
+                </div>
+                <div class="faq-item">
+                    <h4 class="faq-question">4. MiraTrip — это туроператор?</h4>
+                    <p class="faq-answer">Нет. Мы агрегатор, собирающий предложения в одном месте.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="section contact">
+        <div class="container">
+            <h2 class="section__title">Остались вопросы? Свяжитесь с нами!</h2>
+            <p class="contact-text">Напишите нам на <a href="mailto:info@miratrip.net">info@miratrip.net</a> — мы ответим в течение 24 часов.</p>
+        </div>
+    </section>
+
+    <!-- Кнопки навигации -->
+    <div class="back-nav">
+        <a href="index.html" class="btn btn--small"><i class="fas fa-home"></i> На главную</a>
+        <button onclick="history.back()" class="btn btn--small">← Назад</button>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="trust-icons">
+                <span class="trust-item"><i class="fas fa-shield-alt"></i> Без скрытых комиссий</span>
+                <span class="trust-item"><i class="fas fa-handshake"></i> Проверенные партнёры</span>
+                <span class="trust-item"><i class="fas fa-clock"></i> Актуальные цены</span>
+            </div>
+            <p class="disclaimer">Мы не являемся туроператором. Все бронирования осуществляются через партнёрские сервисы.</p>
+            <p class="footer-copy">© 2026 MiraTrip. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.mySwiper', {
+            loop: true,
+            autoplay: { delay: 3000, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        });
+    </script>
+
+    <!-- Скрипт для подсказок и динамических дат событий -->
+    <script>
+        // Подсказки для поля "Куда"
+        const popularDestinations = [
+            "Москва", "Санкт-Петербург", "Стамбул", "Дубай", "Калининград", 
+            "Тбилиси", "Хургада", "Анталия", "Ереван", "Баку", 
+            "Ташкент", "Алматы", "Варшава", "Вильнюс", "Рига", 
+            "Таллин", "Хельсинки", "Стокгольм", "Прага", "Вена"
+        ];
+
+        const input = document.getElementById('destination-input');
+        const suggestionsBox = document.getElementById('suggestions');
+
+        input.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            if (query.length < 1) {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
+            const matches = popularDestinations.filter(city => 
+                city.toLowerCase().includes(query)
+            ).slice(0, 8);
+            
+            if (matches.length === 0) {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
+            
+            let html = '';
+            matches.forEach(city => {
+                html += `<div onclick="selectCity('${city}')">${city}</div>`;
+            });
+            suggestionsBox.innerHTML = html;
+            suggestionsBox.style.display = 'block';
+        });
+
+        window.selectCity = function(city) {
+            input.value = city;
+            suggestionsBox.style.display = 'none';
+        };
+
+        document.addEventListener('click', function(event) {
+            if (!input.contains(event.target) && !suggestionsBox.contains(event.target)) {
+                suggestionsBox.style.display = 'none';
+            }
+        });
+
+        // Динамические даты для событий
+        (function() {
+            const eventCards = document.querySelectorAll('.event-card');
+            if (eventCards.length >= 2) {
+                const now = new Date();
+                const dayOfWeek = now.getDay();
+                
+                function getNextDate(targetDay) {
+                    const result = new Date(now);
+                    result.setDate(now.getDate() + ((targetDay + 7 - dayOfWeek) % 7));
+                    return result;
+                }
+                
+                const nextFriday = getNextDate(5);
+                const monthNames = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+                
+                const secondEventDate = eventCards[1].querySelector('.event-date');
+                if (secondEventDate) {
+                    secondEventDate.querySelector('.day').textContent = nextFriday.getDate();
+                    secondEventDate.querySelector('.month').textContent = monthNames[nextFriday.getMonth()];
+                }
+            }
+        })();
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог MiraTrip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="logo">Mira<span>Trip</span></div>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="index.html" class="nav__link">Главная</a></li>
+                        <li><a href="pages/destinations.html" class="nav__link">Направления</a></li>
+                        <li><a href="pages/tours.html" class="nav__link">Туры и билеты</a></li>
+                        <li><a href="pages/routes.html" class="nav__link">Маршруты</a></li>
+                        <li><a href="pages/events.html" class="nav__link">События</a></li>
+                        <li><a href="pages/ancient-cities.html" class="nav__link">Древние города</a></li>
+                        <li><a href="pages/castles.html" class="nav__link">Замки и дворцы</a></li>
+                        <li><a href="pages/nature.html" class="nav__link">Природа</a></li>
+                        <li><a href="blog.html" class="nav__link active">Блог</a></li>
+                    </ul>
+                </nav>
+                <div class="header__actions">
+                    <button class="burger" id="burger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Блог -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Полезные статьи</h2>
+            <div class="cards-grid">
+                <a href="blog/luchshie-napravleniya-vesnoy.html" class="destination-card">
+                    <img src="images/spring.jpg" alt="Весенние направления" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Лучшие направления весной</h3>
+                        <p class="card-desc">Куда поехать в марте, апреле и мае. Подборка тёплых стран и европейских городов.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="reviews">(8 отзывов)</span>
+                        </div>
+                        <span class="card-btn">Читать</span>
+                    </div>
+                </a>
+                <a href="blog/kak-vybrat-tur.html" class="destination-card">
+                    <img src="images/choose-tour.jpg" alt="Как выбрать тур" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Как выбрать идеальный тур</h3>
+                        <p class="card-desc">Советы по подбору путешествия: бюджет, сезон, страховка и важные мелочи.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="reviews">(15 отзывов)</span>
+                        </div>
+                        <span class="card-btn">Читать</span>
+                    </div>
+                </a>
+                <a href="blog/5-sovetov-dlya-puteshestviy.html" class="destination-card">
+                    <img src="images/travel-tips.jpg" alt="Советы путешественникам" class="card-img" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">5 советов для комфортных путешествий</h3>
+                        <p class="card-desc">Что взять с собой, как сэкономить и не устать в дороге.</p>
+                        <div class="card-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="reviews">(11 отзывов)</span>
+                        </div>
+                        <span class="card-btn">Читать</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Кнопки навигации -->
+    <div class="back-nav">
+        <a href="index.html" class="btn btn--small"><i class="fas fa-home"></i> На главную</a>
+        <button onclick="history.back()" class="btn btn--small">← Назад</button>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="trust-icons">
+                <span class="trust-item"><i class="fas fa-shield-alt"></i> Без скрытых комиссий</span>
+                <span class="trust-item"><i class="fas fa-handshake"></i> Проверенные партнёры</span>
+                <span class="trust-item"><i class="fas fa-clock"></i> Актуальные цены</span>
+            </div>
+            <p class="disclaimer">Мы не являемся туроператором. Все бронирования осуществляются через партнёрские сервисы.</p>
+            <p class="footer-copy">© 2026 MiraTrip. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

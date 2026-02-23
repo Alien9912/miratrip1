@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Направления | MiraTrip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .region-badge { background: #3498db; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-left: 10px; text-transform: uppercase; }
+        .country-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .country-card:hover { transform: translateY(-5px); }
+        .country-img { width: 100%; height: 180px; object-fit: cover; }
+        .country-content { padding: 20px; }
+        .country-title { font-size: 1.5rem; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="logo">Mira<span>Trip</span></div>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="../index.html" class="nav__link">Главная</a></li>
+                        <li><a href="destinations.html" class="nav__link active">Направления</a></li>
+                        <li><a href="tours.html" class="nav__link">Туры и билеты</a></li>
+                        <li><a href="routes.html" class="nav__link">Маршруты</a></li>
+                        <li><a href="events.html" class="nav__link">События</a></li>
+                        <li><a href="ancient-cities.html" class="nav__link">Древние города</a></li>
+                        <li><a href="castles.html" class="nav__link">Замки и дворцы</a></li>
+                        <li><a href="nature.html" class="nav__link">Природа</a></li>
+                        <li><a href="../blog.html" class="nav__link">Блог</a></li>
+                    </ul>
+                </nav>
+                <div class="header__actions">
+                    <button class="burger" id="burger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/destinations-hero.jpg'); background-size: cover; height: 300px;">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title" style="font-size: 2.5rem;">Направления</h1>
+                <p class="hero__subtitle">Выберите страну или регион для путешествия</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #fef9e7;">
+        <div class="container">
+            <div class="fact-block" style="max-width: 800px; margin: 0 auto;">
+                <i class="fas fa-scroll"></i>
+                <p class="fact-text">Загрузка интересного факта...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Популярные страны</h2>
+            <div class="cards-grid">
+                <div class="country-card">
+                    <img src="../images/Turk1.jpg" alt="Турция" class="country-img">
+                    <div class="country-content">
+                        <h3 class="country-title">Турция</h3>
+                        <p>Пляжный отдых, отели all inclusive, экскурсии в Стамбул и Каппадокию.</p>
+                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
+                            <span class="card-price">от 750 BYN</span>
+                            <a href="#" class="card-btn">Туры</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="country-card">
+                    <img src="../images/Egipt.jpg" alt="Египет" class="country-img">
+                    <div class="country-content">
+                        <h3 class="country-title">Египет</h3>
+                        <p>Красное море, дайвинг, пирамиды Гизы, Каир.</p>
+                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
+                            <span class="card-price">от 900 BYN</span>
+                            <a href="#" class="card-btn">Туры</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="country-card">
+                    <img src="../images/Russia.jpg" alt="Россия" class="country-img">
+                    <div class="country-content">
+                        <h3 class="country-title">Россия</h3>
+                        <p>Москва, Санкт-Петербург, Золотое кольцо, Казань.</p>
+                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
+                            <span class="card-price">Билеты от 150 BYN</span>
+                            <a href="#" class="card-btn">Билеты</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="country-card">
+                    <img src="../images/Gruzia.jpg" alt="Грузия" class="country-img">
+                    <div class="country-content">
+                        <h3 class="country-title">Грузия</h3>
+                        <p>Тбилиси, вино, горы, гостеприимство, кухня.</p>
+                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
+                            <span class="card-price">от 650 BYN</span>
+                            <a href="#" class="card-btn">Туры</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="country-card">
+                    <img src="../images/Itali.jpg" alt="Италия" class="country-img">
+                    <div class="country-content">
+                        <h3 class="country-title">Италия</h3>
+                        <p>Рим, Венеция, Флоренция, Милан, итальянская кухня.</p>
+                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
+                            <span class="card-price">от 1200 BYN</span>
+                            <a href="#" class="card-btn">Туры</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="country-card">
+                    <img src="../images/chez.jpg" alt="Чехия" class="country-img">
+                    <div class="country-content">
+                        <h3 class="country-title">Чехия</h3>
+                        <p>Прага, Карловы Вары, пиво, средневековая архитектура.</p>
+                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
+                            <span class="card-price">от 850 BYN</span>
+                            <a href="#" class="card-btn">Туры</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--offers">
+        <div class="container">
+            <h2 class="section__title">Регионы Беларуси</h2>
+            <div class="cards-grid">
+                <div class="destination-card">
+                    <img src="../images/MinskObl.jpg" alt="Минская область" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Минская область</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Центральный регион</div>
+                        <p>Замки Несвижа и Мира, столица Минск, усадьбы, парки.</p>
+                        <div class="card-footer"><span class="card-price">Экскурсии от 50 BYN</span><a href="ancient-cities.html" class="card-btn">Подробнее</a></div>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="../images/BrestObl.jpg" alt="Брестская область" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Брестская область</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Юго-запад</div>
+                        <p>Брестская крепость, Беловежская пуща, дворцы, Полесье.</p>
+                        <div class="card-footer"><span class="card-price">Экскурсии от 55 BYN</span><a href="nature.html" class="card-btn">Подробнее</a></div>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="../images/Vitebsk.jpg" alt="Витебская область" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Витебская область</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Север</div>
+                        <p>Браславские озёра, Полоцк, Витебск, фестиваль «Славянский базар».</p>
+                        <div class="card-footer"><span class="card-price">Экскурсии от 50 BYN</span><a href="nature.html" class="card-btn">Подробнее</a></div>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="../images/Grodno.jpg" alt="Гродненская область" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Гродненская область</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Запад</div>
+                        <p>Коложа, Старый замок, Августовский канал, Лидский замок.</p>
+                        <div class="card-footer"><span class="card-price">Экскурсии от 50 BYN</span><a href="castles.html" class="card-btn">Подробнее</a></div>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="../images/mogilev.jpg" alt="Могилёвская область" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Могилёвская область</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Восток</div>
+                        <p>Могилёв, Мстиславль, дворцы, этнографические комплексы.</p>
+                        <div class="card-footer"><span class="card-price">Экскурсии от 45 BYN</span><a href="ancient-cities.html" class="card-btn">Подробнее</a></div>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="../images/Gomel.jpg" alt="Гомельская область" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Гомельская область</h3>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Юго-восток</div>
+                        <p>Дворец Паскевичей, Припятское Полесье, Туров, Мозырь.</p>
+                        <div class="card-footer"><span class="card-price">Экскурсии от 45 BYN</span><a href="castles.html" class="card-btn">Подробнее</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="back-nav">
+        <a href="../index.html" class="btn btn--small"><i class="fas fa-home"></i> На главную</a>
+        <button onclick="history.back()" class="btn btn--small">← Назад</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="disclaimer">Мы не являемся туроператором. Все бронирования осуществляются через партнёрские сервисы.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

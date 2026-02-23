@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Замки и дворцы Беларуси | MiraTrip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .unesco-badge { background: #2c3e50; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; display: inline-block; margin-left: 10px; }
+        .castle-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 30px; display: flex; flex-wrap: wrap; }
+        .castle-img { flex: 1; min-width: 300px; height: 300px; object-fit: cover; }
+        .castle-content { flex: 2; padding: 30px; }
+        .castle-title { font-size: 2rem; margin-bottom: 10px; color: #2c3e50; }
+        .castle-meta { display: flex; gap: 20px; margin-bottom: 20px; color: #7f8c8d; flex-wrap: wrap; }
+        @media (max-width: 768px) { .castle-card { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="logo">Mira<span>Trip</span></div>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="../index.html" class="nav__link">Главная</a></li>
+                        <li><a href="destinations.html" class="nav__link">Направления</a></li>
+                        <li><a href="tours.html" class="nav__link">Туры и билеты</a></li>
+                        <li><a href="routes.html" class="nav__link">Маршруты</a></li>
+                        <li><a href="events.html" class="nav__link">События</a></li>
+                        <li><a href="ancient-cities.html" class="nav__link">Древние города</a></li>
+                        <li><a href="castles.html" class="nav__link active">Замки и дворцы</a></li>
+                        <li><a href="nature.html" class="nav__link">Природа</a></li>
+                        <li><a href="../blog.html" class="nav__link">Блог</a></li>
+                    </ul>
+                </nav>
+                <div class="header__actions">
+                    <button class="burger" id="burger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/castles-hero.jpg'); background-size: cover; height: 400px;">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title" style="font-size: 2.5rem;">Замки и дворцы Беларуси</h1>
+                <p class="hero__subtitle">От средневековых крепостей до величественных резиденций</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #fef9e7;">
+        <div class="container">
+            <div class="fact-block" style="max-width: 800px; margin: 0 auto;">
+                <i class="fas fa-scroll"></i>
+                <p class="fact-text">Загрузка интересного факта...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="castle-card">
+                <img src="../images/nesvizh.jpg" alt="Несвижский замок" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Несвижский замок <span class="unesco-badge">ЮНЕСКО</span></h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Несвиж</span><span><i class="fas fa-calendar-alt"></i> XVI век</span></div>
+                    <p>Резиденция князей Радзивиллов. Архитектура сочетает барокко, ренессанс и классицизм.</p>
+                    <p style="font-style: italic;">✨ Подземные ходы, коллекция саркофагов.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Экскурсии от 70 BYN</a><a href="#" class="btn btn--small">Отели</a></div>
+                </div>
+            </div>
+            <div class="castle-card">
+                <img src="../images/mir.jpg" alt="Мирский замок" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Мирский замок <span class="unesco-badge">ЮНЕСКО</span></h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Мир</span><span><i class="fas fa-calendar-alt"></i> XVI век</span></div>
+                    <p>Готика, ренессанс, барокко. Легенда о Белой Даме.</p>
+                    <p style="font-style: italic;">✨ В башне нашли замурованную комнату с доспехами.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Экскурсии от 65 BYN</a><a href="#" class="btn btn--small">Отели</a></div>
+                </div>
+            </div>
+            <div class="castle-card">
+                <img src="../images/lida.jpg" alt="Лидский замок" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Лидский замок</h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Лида</span><span><i class="fas fa-calendar-alt"></i> 1323</span></div>
+                    <p>Крепость князя Гедимина. Ни разу не взят штурмом – только хитростью.</p>
+                    <p style="font-style: italic;">✨ Ежегодный рыцарский фестиваль.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Вход 8 BYN</a><a href="#" class="btn btn--small">Экскурсия</a></div>
+                </div>
+            </div>
+            <div class="castle-card">
+                <img src="../images/ruzhany.jpg" alt="Дворец Сапегов" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Ружанский дворец</h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Ружаны</span><span><i class="fas fa-calendar-alt"></i> XVII век</span></div>
+                    <p>Резиденция Сапегов с театром и балетной труппой.</p>
+                    <p style="font-style: italic;">✨ Ручной медведь подавал пиво.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Вход 5 BYN</a><a href="#" class="btn btn--small">Экскурсия</a></div>
+                </div>
+            </div>
+            <div class="castle-card">
+                <img src="../images/palace-gomel.jpg" alt="Гомельский дворец" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Дворец Румянцевых-Паскевичей</h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Гомель</span><span><i class="fas fa-calendar-alt"></i> 1777–1785</span></div>
+                    <p>Жемчужина Гомеля, изображён на 20-рублёвой купюре.</p>
+                    <p style="font-style: italic;">✨ Княгиня Ирина Паскевич перевела «Войну и мир» на французский.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Экскурсии от 6,5 BYN</a><a href="#" class="btn btn--small">Отели</a></div>
+                </div>
+            </div>
+            <div class="castle-card">
+                <img src="../images/kossovo.jpg" alt="Коссовский замок" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Коссовский замок</h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Коссово</span><span><i class="fas fa-calendar-alt"></i> XIX век</span></div>
+                    <p>Неоготика, 12 башен – по числу месяцев. Легенда о таинственном свете.</p>
+                    <p style="font-style: italic;">✨ Рядом – усадьба Тадеуша Костюшко.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Экскурсии от 10 BYN</a><a href="#" class="btn btn--small">Забронировать</a></div>
+                </div>
+            </div>
+            <div class="castle-card">
+                <img src="../images/golshany.jpg" alt="Гольшанский замок" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Гольшанский замок</h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Гольшаны</span><span><i class="fas fa-calendar-alt"></i> XVII век</span></div>
+                    <p>Руины с призраком Чёрной монахини.</p>
+                    <p style="font-style: italic;">✨ Рядом – костёл с фресками.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Вход бесплатный</a><a href="#" class="btn btn--small">Экскурсия</a></div>
+                </div>
+            </div>
+            <div class="castle-card">
+                <img src="../images/krevo.jpg" alt="Кревский замок" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Кревский замок</h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Крево</span><span><i class="fas fa-calendar-alt"></i> XIV век</span></div>
+                    <p>Руины первого каменного замка ВКЛ. Кревская уния 1385 года.</p>
+                    <p style="font-style: italic;">✨ Неисследованные подземелья.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Вход бесплатный</a><a href="#" class="btn btn--small">Экскурсия</a></div>
+                </div>
+            </div>
+            <div class="castle-card">
+                <img src="../images/zhilichi.jpg" alt="Жиличский дворец" class="castle-img">
+                <div class="castle-content">
+                    <h2 class="castle-title">Дворец Булгаков в Жиличах</h2>
+                    <div class="castle-meta"><span><i class="fas fa-map-marker-alt"></i> Жиличи</span><span><i class="fas fa-calendar-alt"></i> XIX век</span></div>
+                    <p>Неоготическая усадьба с интерьерами, парк с прудами.</p>
+                    <p style="font-style: italic;">✨ Восстанавливается.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;"><a href="#" class="btn">Экскурсии от 5 BYN</a><a href="#" class="btn btn--small">Забронировать</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="back-nav">
+        <a href="../index.html" class="btn btn--small"><i class="fas fa-home"></i> На главную</a>
+        <button onclick="history.back()" class="btn btn--small">← Назад</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="disclaimer">Мы не являемся туроператором. Все бронирования осуществляются через партнёрские сервисы.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

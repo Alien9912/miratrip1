@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Древние города Беларуси | MiraTrip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .century-badge { display: inline-block; background: #2c3e50; color: #fff; padding: 5px 15px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; }
+        .timeline { display: flex; flex-wrap: wrap; justify-content: space-between; margin: 40px 0; }
+        .timeline-item { flex: 1; min-width: 150px; text-align: center; padding: 15px; background: #fff; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin: 0 5px; }
+        .timeline-year { font-size: 1.8rem; font-weight: 700; color: #e67e22; }
+        .timeline-city { font-weight: 600; color: #2c3e50; }
+        @media (max-width: 768px) { .timeline-item { margin-bottom: 10px; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="logo">Mira<span>Trip</span></div>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="../index.html" class="nav__link">Главная</a></li>
+                        <li><a href="destinations.html" class="nav__link">Направления</a></li>
+                        <li><a href="tours.html" class="nav__link">Туры и билеты</a></li>
+                        <li><a href="routes.html" class="nav__link">Маршруты</a></li>
+                        <li><a href="events.html" class="nav__link">События</a></li>
+                        <li><a href="ancient-cities.html" class="nav__link active">Древние города</a></li>
+                        <li><a href="castles.html" class="nav__link">Замки и дворцы</a></li>
+                        <li><a href="nature.html" class="nav__link">Природа</a></li>
+                        <li><a href="../blog.html" class="nav__link">Блог</a></li>
+                    </ul>
+                </nav>
+                <div class="header__actions">
+                    <button class="burger" id="burger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/ancient-hero.jpg'); background-size: cover; height: 400px;">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title">Древние города Беларуси</h1>
+                <p class="hero__subtitle">Путешествие сквозь века</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #fef9e7;">
+        <div class="container">
+            <div class="fact-block" style="max-width: 800px; margin: 0 auto;">
+                <i class="fas fa-scroll"></i>
+                <p class="fact-text">Загрузка интересного факта...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Хронология древнейших городов</h2>
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-year">862</div><div class="timeline-city">Полоцк</div><small>Первое упоминание</small></div>
+                <div class="timeline-item"><div class="timeline-year">974</div><div class="timeline-city">Витебск</div><small>Основание</small></div>
+                <div class="timeline-item"><div class="timeline-year">980</div><div class="timeline-city">Туров</div><small>"Повесть временных лет"</small></div>
+                <div class="timeline-item"><div class="timeline-year">985</div><div class="timeline-city">Заславль</div><small>Основан Владимиром</small></div>
+                <div class="timeline-item"><div class="timeline-year">1005</div><div class="timeline-city">Волковыск</div><small>Туровская летопись</small></div>
+                <div class="timeline-item"><div class="timeline-year">1067</div><div class="timeline-city">Минск</div><small>На реке Немиге</small></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Сокровища белорусской истории</h2>
+            <div class="cards-grid">
+                <div class="destination-card"><img src="../images/polotsk.jpg" class="card-img"><div class="card-content"><span class="century-badge">862</span><h3>Полоцк</h3><p>Софийский собор XI века, древнейший город.</p><div class="card-footer"><span class="card-price">от 65 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <div class="destination-card"><img src="../images/vitebsk.jpg" class="card-img"><div class="card-content"><span class="century-badge">974</span><h3>Витебск</h3><p>Родина Марка Шагала, ратуша.</p><div class="card-footer"><span class="card-price">от 55 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <div class="destination-card"><img src="../images/turov.jpg" class="card-img"><div class="card-content"><span class="century-badge">980</span><h3>Туров</h3><p>Древний крест, Туровское Евангелие.</p><div class="card-footer"><span class="card-price">от 55 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <div class="destination-card"><img src="../images/grodno.jpg" class="card-img"><div class="card-content"><span class="century-badge">XII век</span><h3>Гродно</h3><p>Коложская церковь с голосниками.</p><div class="card-footer"><span class="card-price">от 60 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <div class="destination-card"><img src="../images/brest.jpg" class="card-img"><div class="card-content"><span class="century-badge">1019</span><h3>Брест</h3><p>Брестская крепость, пешеходная улица.</p><div class="card-footer"><span class="card-price">от 50 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <div class="destination-card"><img src="../images/novogrudok.jpg" class="card-img"><div class="card-content"><span class="century-badge">XIII век</span><h3>Новогрудок</h3><p>Первая столица ВКЛ, руины замка.</p><div class="card-footer"><span class="card-price">от 55 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <div class="destination-card"><img src="../images/pinsk.jpg" class="card-img"><div class="card-content"><span class="century-badge">1097</span><h3>Пинск</h3><p>«Полесская Венеция», иезуитский коллегиум.</p><div class="card-footer"><span class="card-price">от 45 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <div class="destination-card"><img src="../images/zaslavl.jpg" class="card-img"><div class="card-content"><span class="century-badge">985</span><h3>Заславль</h3><p>Городище «Замэчек».</p><div class="card-footer"><span class="card-price">от 45 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+                <div class="destination-card"><img src="../images/mogilev.jpg" class="card-img"><div class="card-content"><span class="century-badge">1267</span><h3>Могилёв</h3><p>Ратуша, площадь Звёзд.</p><div class="card-footer"><span class="card-price">от 50 BYN</span><a href="#" class="card-btn">Подробнее</a></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="back-nav">
+        <a href="../index.html" class="btn btn--small"><i class="fas fa-home"></i> На главную</a>
+        <button onclick="history.back()" class="btn btn--small">← Назад</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 MiraTrip. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
