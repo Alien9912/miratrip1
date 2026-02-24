@@ -741,3 +741,132 @@ body {
         text-align: center;
     }
 }
+
+/* ===== НОВЫЙ СТИЛЬНЫЙ ПОИСК (КОРОТКИЙ И КОМПАКТНЫЙ) ===== */
+.search-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-form__input {
+    flex: 1 1 150px;
+    padding: 10px 15px 10px 38px;
+    border: none;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    outline: none;
+    color: #333;
+    height: 44px;
+}
+
+/* Иконка самолёта для поля "Откуда" */
+.search-form__input[name="origin"] {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23ff7f50" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 14px center;
+    background-size: 16px;
+}
+
+/* Иконка глобуса для поля "Куда" */
+.search-form__input[id="destination-input"] {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23ff7f50" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 14px center;
+    background-size: 16px;
+}
+
+.search-form__input:hover,
+.search-form__input:focus {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+.search-form__input:focus {
+    box-shadow: 0 0 0 3px rgba(255,127,80,0.3);
+}
+
+.search-form__input::placeholder {
+    color: #aaa;
+    font-weight: 300;
+}
+
+/* Кнопка поиска в стиле ваших главных кнопок */
+.search-form__btn {
+    padding: 10px 22px;
+    background: linear-gradient(90deg, #ff7f50, #ff5722);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(255,87,34,0.3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    height: 44px;
+    transition: all 0.3s ease;
+}
+
+.search-form__btn::before {
+    content: "🔍";
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.search-form__btn:hover {
+    background: #ff5722;
+    box-shadow: 0 6px 16px rgba(255,87,34,0.4);
+    transform: translateY(-2px);
+}
+
+/* Мобильная адаптация для нового поиска */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .search-form__input,
+    .search-form__btn {
+        width: 100%;
+        padding: 8px 12px 8px 32px;
+        font-size: 0.9rem;
+        height: 42px;
+    }
+    .search-form__btn {
+        padding: 8px 12px;
+    }
+    .search-form__input[name="origin"] {
+        background-position: 10px center;
+        background-size: 14px;
+    }
+    .search-form__input[id="destination-input"] {
+        background-position: 10px center;
+        background-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-form__input,
+    .search-form__btn {
+        padding: 7px 10px 7px 30px;
+        font-size: 0.85rem;
+        height: 38px;
+    }
+    .search-form__btn {
+        padding: 7px 10px;
+    }
+}

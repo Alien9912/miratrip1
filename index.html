@@ -24,61 +24,10 @@
     <!-- Относительный путь к CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Жёсткие стили для формы поиска на мобильных -->
+    <!-- Единственный стиль для логотипа (чтобы курсор был pointer) -->
     <style>
         .logo {
             cursor: pointer;
-        }
-        @media (max-width: 768px) {
-            .hero__content .search-container,
-            .search-container {
-                max-width: 280px !important;
-                width: 100% !important;
-                margin-left: auto !important;
-                margin-right: auto !important;
-                padding: 0 !important;
-                background: transparent !important;
-            }
-            .hero__content .search-form,
-            .search-form {
-                flex-direction: column !important;
-                gap: 5px !important;
-                width: 100% !important;
-            }
-            .hero__content .search-form__input,
-            .hero__content .search-form__btn,
-            .search-form__input,
-            .search-form__btn {
-                width: 100% !important;
-                min-width: 0 !important;
-                padding: 8px 12px !important;
-                font-size: 0.9rem !important;
-                box-sizing: border-box !important;
-                border-radius: 5px !important;
-            }
-            .hero__content .search-form__btn,
-            .search-form__btn {
-                background: #e67e22 !important;
-                color: #fff !important;
-                font-weight: 600 !important;
-            }
-            .hero__content {
-                padding-left: 10px !important;
-                padding-right: 10px !important;
-            }
-        }
-        @media (max-width: 480px) {
-            .hero__content .search-container,
-            .search-container {
-                max-width: 220px !important;
-            }
-            .hero__content .search-form__input,
-            .hero__content .search-form__btn,
-            .search-form__input,
-            .search-form__btn {
-                padding: 6px 10px !important;
-                font-size: 0.85rem !important;
-            }
         }
     </style>
 </head>
