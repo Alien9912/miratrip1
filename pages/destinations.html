@@ -10,12 +10,182 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .region-badge { background: #3498db; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-left: 10px; text-transform: uppercase; }
-        .country-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .country-card:hover { transform: translateY(-5px); }
-        .country-img { width: 100%; height: 180px; object-fit: cover; }
-        .country-content { padding: 20px; }
-        .country-title { font-size: 1.5rem; margin-bottom: 10px; }
+        /* Стили для карточек */
+        .country-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .country-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .country-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .country-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .visa-badge {
+            background: #e67e22;
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 30px;
+            text-transform: uppercase;
+        }
+        .card-footer {
+            margin-top: auto;
+        }
+
+        /* Стили для модальных окон */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 24px;
+            max-width: 1000px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .close-modal {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            color: #aaa;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-modal:hover {
+            color: #e67e22;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .modal-description {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .quick-btn {
+            background: #e67e22;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quick-btn:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+        }
+        .modal-cities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .modal-city {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .modal-city h4 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+        .city-description {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .transport-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .transport-icons a {
+            color: #333;
+            font-size: 1.4rem;
+            transition: color 0.3s, transform 0.2s;
+        }
+        .transport-icons a:hover {
+            color: #e67e22;
+            transform: scale(1.1);
+        }
+        .modal-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .modal-highlight {
+            background: #fef9e7;
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .modal-highlight strong {
+            color: #2c3e50;
+        }
+        .modal-highlight p {
+            color: #555;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -63,139 +233,27 @@
         </div>
     </section>
 
+    <!-- ===== БЕЗВИЗОВЫЕ НАПРАВЛЕНИЯ ===== -->
     <section class="section">
         <div class="container">
-            <h2 class="section__title">Популярные страны</h2>
-            <div class="cards-grid">
-                <div class="country-card">
-                    <img src="../images/Turk1.jpg" alt="Турция" class="country-img">
-                    <div class="country-content">
-                        <h3 class="country-title">Турция</h3>
-                        <p>Пляжный отдых, отели all inclusive, экскурсии в Стамбул и Каппадокию.</p>
-                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
-                            <span class="card-price">от 750 BYN</span>
-                            <a href="#" class="card-btn">Туры</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="country-card">
-                    <img src="../images/Egipt.jpg" alt="Египет" class="country-img">
-                    <div class="country-content">
-                        <h3 class="country-title">Египет</h3>
-                        <p>Красное море, дайвинг, пирамиды Гизы, Каир.</p>
-                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
-                            <span class="card-price">от 900 BYN</span>
-                            <a href="#" class="card-btn">Туры</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="country-card">
-                    <img src="../images/Russia.jpg" alt="Россия" class="country-img">
-                    <div class="country-content">
-                        <h3 class="country-title">Россия</h3>
-                        <p>Москва, Санкт-Петербург, Золотое кольцо, Казань.</p>
-                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
-                            <span class="card-price">Билеты от 150 BYN</span>
-                            <a href="#" class="card-btn">Билеты</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="country-card">
-                    <img src="../images/Gruzia.jpg" alt="Грузия" class="country-img">
-                    <div class="country-content">
-                        <h3 class="country-title">Грузия</h3>
-                        <p>Тбилиси, вино, горы, гостеприимство, кухня.</p>
-                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
-                            <span class="card-price">от 650 BYN</span>
-                            <a href="#" class="card-btn">Туры</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="country-card">
-                    <img src="../images/Itali.jpg" alt="Италия" class="country-img">
-                    <div class="country-content">
-                        <h3 class="country-title">Италия</h3>
-                        <p>Рим, Венеция, Флоренция, Милан, итальянская кухня.</p>
-                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
-                            <span class="card-price">от 1200 BYN</span>
-                            <a href="#" class="card-btn">Туры</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="country-card">
-                    <img src="../images/chez.jpg" alt="Чехия" class="country-img">
-                    <div class="country-content">
-                        <h3 class="country-title">Чехия</h3>
-                        <p>Прага, Карловы Вары, пиво, средневековая архитектура.</p>
-                        <div class="card-footer" style="border-top: none; padding-top: 10px;">
-                            <span class="card-price">от 850 BYN</span>
-                            <a href="#" class="card-btn">Туры</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="section__title">🌍 Безвизовые направления</h2>
+            <div class="cards-grid" id="visa-free-grid"></div>
         </div>
     </section>
 
+    <!-- ===== НАПРАВЛЕНИЯ С ВИЗОЙ ===== -->
     <section class="section section--offers">
         <div class="container">
-            <h2 class="section__title">Регионы Беларуси</h2>
-            <div class="cards-grid">
-                <div class="destination-card">
-                    <img src="../images/MinskObl.jpg" alt="Минская область" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Минская область</h3>
-                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Центральный регион</div>
-                        <p>Замки Несвижа и Мира, столица Минск, усадьбы, парки.</p>
-                        <div class="card-footer"><span class="card-price">Экскурсии от 50 BYN</span><a href="ancient-cities.html" class="card-btn">Подробнее</a></div>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="../images/BrestObl.jpg" alt="Брестская область" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Брестская область</h3>
-                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Юго-запад</div>
-                        <p>Брестская крепость, Беловежская пуща, дворцы, Полесье.</p>
-                        <div class="card-footer"><span class="card-price">Экскурсии от 55 BYN</span><a href="nature.html" class="card-btn">Подробнее</a></div>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="../images/Vitebsk.jpg" alt="Витебская область" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Витебская область</h3>
-                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Север</div>
-                        <p>Браславские озёра, Полоцк, Витебск, фестиваль «Славянский базар».</p>
-                        <div class="card-footer"><span class="card-price">Экскурсии от 50 BYN</span><a href="nature.html" class="card-btn">Подробнее</a></div>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="../images/Grodno.jpg" alt="Гродненская область" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Гродненская область</h3>
-                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Запад</div>
-                        <p>Коложа, Старый замок, Августовский канал, Лидский замок.</p>
-                        <div class="card-footer"><span class="card-price">Экскурсии от 50 BYN</span><a href="castles.html" class="card-btn">Подробнее</a></div>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="../images/mogilev.jpg" alt="Могилёвская область" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Могилёвская область</h3>
-                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Восток</div>
-                        <p>Могилёв, Мстиславль, дворцы, этнографические комплексы.</p>
-                        <div class="card-footer"><span class="card-price">Экскурсии от 45 BYN</span><a href="ancient-cities.html" class="card-btn">Подробнее</a></div>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="../images/Gomel.jpg" alt="Гомельская область" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Гомельская область</h3>
-                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> Юго-восток</div>
-                        <p>Дворец Паскевичей, Припятское Полесье, Туров, Мозырь.</p>
-                        <div class="card-footer"><span class="card-price">Экскурсии от 45 BYN</span><a href="castles.html" class="card-btn">Подробнее</a></div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="section__title">🛂 Направления с визой</h2>
+            <div class="cards-grid" id="visa-grid"></div>
+        </div>
+    </section>
+
+    <!-- ===== РЕГИОНЫ БЕЛАРУСИ ===== -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">🇧🇾 Регионы Беларуси</h2>
+            <div class="cards-grid" id="belarus-grid"></div>
         </div>
     </section>
 
@@ -206,10 +264,1352 @@
 
     <footer class="footer">
         <div class="container">
+            <div class="trust-icons">
+                <span class="trust-item"><i class="fas fa-shield-alt"></i> Без скрытых комиссий</span>
+                <span class="trust-item"><i class="fas fa-handshake"></i> Проверенные партнёры</span>
+                <span class="trust-item"><i class="fas fa-clock"></i> Актуальные цены</span>
+            </div>
             <p class="disclaimer">Мы не являемся туроператором. Все бронирования осуществляются через партнёрские сервисы.</p>
         </div>
     </footer>
 
+    <!-- ===== МОДАЛЬНЫЕ ОКНА ДЛЯ БЕЗВИЗОВЫХ СТРАН ===== -->
+
+    <!-- Турция -->
+    <div id="modal-turkey" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Турция</h2>
+            <div class="modal-description">
+                <p>Страна, где Восток встречается с Западом. Турция предлагает всё: от античных руин и османской архитектуры до современных курортов с системой «всё включено». Пляжи Средиземного и Эгейского морей, уникальные ландшафты Каппадокии, шумные базары Стамбула — каждый найдёт что-то своё.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQAYT1?marker=704140.turkey_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Турция&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://travelata.ru/search?marker=704140&subid=turkey_tours" target="_blank" class="quick-btn">🌴 Туры</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города и курорты</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Стамбул</h4>
+                    <p class="city-description">Город на двух континентах</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQIST1?marker=704140.istanbul_flight" target="_blank" title="Авиабилеты">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?nn=1&from=Минск&to=Стамбул" target="_blank" title="Ж/д билеты">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Стамбул" target="_blank" title="Автобусные билеты">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Анталия</h4>
+                    <p class="city-description">Курортная столица</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQAYT1?marker=704140.antalya_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Анталия" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Анталия" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Каппадокия</h4>
+                    <p class="city-description">Полёты на воздушных шарах</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQNAV1?marker=704140.cappadocia_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Невшехир" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Невшехир" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Бодрум</h4>
+                    <p class="city-description">Белоснежные домики, яхтенный порт</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQBJV1?marker=704140.bodrum_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Бодрум" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Бодрум" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Айя-София (Стамбул)</strong>
+                    <p>Шедевр византийской архитектуры, бывший собор, мечеть, ныне музей.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Памуккале</strong>
+                    <p>Белые травертиновые террасы, античный город Иераполис.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Эфес</strong>
+                    <p>Один из наиболее сохранившихся античных городов Средиземноморья.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Египет -->
+    <div id="modal-egypt" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Египет</h2>
+            <div class="modal-description">
+                <p>Страна пирамид и Красного моря. Египет привлекает любителей истории, дайверов и пляжных туристов. Каир, Луксор, Хургада и Шарм-эль-Шейх — главные направления.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQHRG1?marker=704140.egypt_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Египет&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://travelata.ru/search?marker=704140&subid=egypt_tours" target="_blank" class="quick-btn">🌴 Туры</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города и курорты</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Каир</h4>
+                    <p class="city-description">Столица, пирамиды Гизы</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQCAI1?marker=704140.cairo_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Каир" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Каир" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Хургада</h4>
+                    <p class="city-description">Курорт на Красном море</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQHRG1?marker=704140.hurghada_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Хургада" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Хургада" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Шарм-эль-Шейх</h4>
+                    <p class="city-description">Дайвинг, кораллы</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQSSH1?marker=704140.sharm_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Шарм-эль-Шейх" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Шарм-эль-Шейх" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Пирамиды Гизы</strong>
+                    <p>Единственное из семи чудес света, сохранившееся до наших дней.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Долина Царей</strong>
+                    <p>Гробницы фараонов в Луксоре.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Грузия -->
+    <div id="modal-georgia" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Грузия</h2>
+            <div class="modal-description">
+                <p>Гостеприимная страна с древней историей, вкусной кухней и великолепными горами. Тбилиси, Батуми, Казбеги, Сванетия – здесь каждый найдёт что-то для себя.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQTBS1?marker=704140.georgia_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Грузия&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://travelata.ru/search?marker=704140&subid=georgia_tours" target="_blank" class="quick-btn">🌴 Туры</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Тбилиси</h4>
+                    <p class="city-description">Столица, старый город, серные бани</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQTBS1?marker=704140.tbilisi_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Тбилиси" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Тбилиси" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Батуми</h4>
+                    <p class="city-description">Приморский курорт, башня алфавита</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQBUS1?marker=704140.batumi_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Батуми" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Батуми" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Казбеги (Степанцминда)</h4>
+                    <p class="city-description">Горы, Троицкая церковь</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQTBS1?marker=704140.kazbegi_flight" target="_blank">✈️ (через Тбилиси)</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Казбеги" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Троицкая церковь в Казбеги</strong>
+                    <p>Живописный храм на фоне Казбека.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Старый Тбилиси</strong>
+                    <p>Узкие улочки, разноцветные дома, серные бани.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Сербия -->
+    <div id="modal-serbia" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Сербия</h2>
+            <div class="modal-description">
+                <p>Сербия – страна с богатой историей, вкусной едой и дружелюбными людьми. Белград, Нови-Сад, горнолыжные курорты.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQBEG1?marker=704140.serbia_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Сербия&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Белград</h4>
+                    <p class="city-description">Столица, крепость Калемегдан, Скадарлия</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQBEG1?marker=704140.belgrade_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Белград" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Белград" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Нови-Сад</h4>
+                    <p class="city-description">Петроварадинская крепость, культура</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQBEG1?marker=704140.novisad_flight" target="_blank">✈️ (через Белград)</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Нови-Сад" target="_blank">🚆</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Крепость Калемегдан</strong>
+                    <p>Историческое сердце Белграда.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Черногория -->
+    <div id="modal-montenegro" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Черногория</h2>
+            <div class="modal-description">
+                <p>Живописное побережье Адриатики, национальные парки и средневековые города. Котор, Будва, Дурмитор.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQTGD1?marker=704140.montenegro_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Черногория&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Котор</h4>
+                    <p class="city-description">Старый город под охраной ЮНЕСКО</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQTGD1?marker=704140.kotor_flight" target="_blank">✈️ (через Тиват)</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Котор" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Будва</h4>
+                    <p class="city-description">Пляжи, ночная жизнь</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQTGD1?marker=704140.budva_flight" target="_blank">✈️</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Будва" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Которская бухта</strong>
+                    <p>Живописный залив, окружённый горами.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Азербайджан -->
+    <div id="modal-azerbaijan" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Азербайджан</h2>
+            <div class="modal-description">
+                <p>Страна огней, современный Баку, древние селения и горные пейзажи.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQGYD1?marker=704140.azerbaijan_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Азербайджан&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Баку</h4>
+                    <p class="city-description">Столица, Пламенные башни, Девичья башня</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQGYD1?marker=704140.baku_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Баку" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Баку" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Девичья башня</strong>
+                    <p>Древняя крепость в центре Баку.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Казахстан -->
+    <div id="modal-kazakhstan" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Казахстан</h2>
+            <div class="modal-description">
+                <p>Огромная страна с современными городами и уникальной природой. Алматы, Астана, Чарынский каньон.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQALA1?marker=704140.kazakhstan_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Казахстан&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Алматы</h4>
+                    <p class="city-description">Южная столица, горы, яблоки</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQALA1?marker=704140.almaty_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Алматы" target="_blank">🚆</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Астана</h4>
+                    <p class="city-description">Современная архитектура, Байтерек</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQNQZ1?marker=704140.astana_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Астана" target="_blank">🚆</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Узбекистан -->
+    <div id="modal-uzbekistan" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Узбекистан</h2>
+            <div class="modal-description">
+                <p>Самарканд, Бухара, Хива – города Великого шёлкового пути.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQTAS1?marker=704140.uzbekistan_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Узбекистан&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Ташкент</h4>
+                    <p class="city-description">Столица, метро, восточный базар</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQTAS1?marker=704140.tashkent_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Ташкент" target="_blank">🚆</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Самарканд</h4>
+                    <p class="city-description">Регистан, бирюзовые купола</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQSKD1?marker=704140.samarkand_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Самарканд" target="_blank">🚆</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Регистан</strong>
+                    <p>Главная площадь Самарканда с величественными медресе.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Таиланд -->
+    <div id="modal-thailand" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Таиланд</h2>
+            <div class="modal-description">
+                <p>Королевство улыбок, тропические острова, буддийские храмы и изысканная кухня.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQBKK1?marker=704140.thailand_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Таиланд&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://travelata.ru/search?marker=704140&subid=thailand_tours" target="_blank" class="quick-btn">🌴 Туры</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Бангкок</h4>
+                    <p class="city-description">Столица, храмы, ночная жизнь</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQBKK1?marker=704140.bangkok_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Пхукет</h4>
+                    <p class="city-description">Остров, пляжи, вечеринки</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQHKT1?marker=704140.phuket_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Краби</h4>
+                    <p class="city-description">Скалы, море, рай для туристов</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQKBV1?marker=704140.krabi_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Ват Пхо</strong>
+                    <p>Храм лежащего Будды в Бангкоке.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Острова Пхи-Пхи</strong>
+                    <p>Живописный архипелаг с изумрудной водой.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Мальдивы -->
+    <div id="modal-maldives" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Мальдивы</h2>
+            <div class="modal-description">
+                <p>Райские острова с белоснежными пляжами, бирюзовой водой и роскошными курортами.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQMLE1?marker=704140.maldives_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Мальдивы&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Мале</h4>
+                    <p class="city-description">Столица</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQMLE1?marker=704140.male_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Атолл Арри</strong>
+                    <p>Популярное место для дайвинга.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ОАЭ -->
+    <div id="modal-uae" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">ОАЭ</h2>
+            <div class="modal-description">
+                <p>Дубай, Абу-Даби, Шарджа – футуристические небоскрёбы, шопинг и пляжи.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQDXB1?marker=704140.uae_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=ОАЭ&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://travelata.ru/search?marker=704140&subid=uae_tours" target="_blank" class="quick-btn">🌴 Туры</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Дубай</h4>
+                    <p class="city-description">Бурдж-Халифа, моллы, аквапарки</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQDXB1?marker=704140.dubai_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Абу-Даби</h4>
+                    <p class="city-description">Мечеть шейха Зайда, Лувр</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQAUH1?marker=704140.abudhabi_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Бурдж-Халифа</strong>
+                    <p>Самое высокое здание в мире.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Мечеть шейха Зайда</strong>
+                    <p>Одна из крупнейших мечетей мира.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Карелия -->
+    <div id="modal-karelia" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Карелия</h2>
+            <div class="modal-description">
+                <p>Край озёр, скал и лесов. Кижи, Валаам, Рускеала – уникальные природные и культурные достопримечательности.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQPES1?marker=704140.karelia_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Карелия&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Петрозаводск" target="_blank" class="quick-btn">🚆 Ж/Д</a>
+            </div>
+            <h3>Популярные места</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Петрозаводск</h4>
+                    <p class="city-description">Столица Карелии</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQPES1?marker=704140.petrozavodsk_flight" target="_blank">✈️</a>
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Петрозаводск" target="_blank">🚆</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Кижи</strong>
+                    <p>Музей деревянного зодчества под открытым небом.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Валаам</strong>
+                    <p>Остров с древним монастырём.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Горный парк Рускеала</strong>
+                    <p>Мраморные карьеры и каньоны.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНЫЕ ОКНА ДЛЯ ВИЗОВЫХ СТРАН (детальные) ===== -->
+
+    <!-- Италия -->
+    <div id="modal-italy" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Италия</h2>
+            <div class="modal-description">
+                <p>Страна с богатой историей, искусством и кухней. Рим, Венеция, Флоренция, Милан.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQROM1?marker=704140.italy_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Италия&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://travelata.ru/search?marker=704140&subid=italy_tours" target="_blank" class="quick-btn">🌴 Туры</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Рим</h4>
+                    <p class="city-description">Столица, Колизей, Ватикан</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQROM1?marker=704140.rome_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Венеция</h4>
+                    <p class="city-description">Город на воде, каналы</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQVCE1?marker=704140.venice_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Флоренция</h4>
+                    <p class="city-description">Ренессанс, Уффици</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQFLR1?marker=704140.florence_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Милан</h4>
+                    <p class="city-description">Мода, собор Дуомо</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQMXP1?marker=704140.milan_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Колизей</strong>
+                    <p>Древнеримский амфитеатр.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Собор Святого Петра</strong>
+                    <p>Главный католический собор мира.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Пизанская башня</strong>
+                    <p>Знаменитая падающая башня.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Испания -->
+    <div id="modal-spain" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Испания</h2>
+            <div class="modal-description">
+                <p>Мадрид, Барселона, Валенсия, пляжи и фламенко.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQMAD1?marker=704140.spain_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Испания&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://travelata.ru/search?marker=704140&subid=spain_tours" target="_blank" class="quick-btn">🌴 Туры</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Мадрид</h4>
+                    <p class="city-description">Столица, музей Прадо</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQMAD1?marker=704140.madrid_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Барселона</h4>
+                    <p class="city-description">Гауди, Саграда Фамилия</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQBCN1?marker=704140.barcelona_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Валенсия</h4>
+                    <p class="city-description">Город искусств и наук</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQVLC1?marker=704140.valencia_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Саграда Фамилия</strong>
+                    <p>Знаменитый собор Гауди.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Королевский дворец в Мадриде</strong>
+                    <p>Официальная резиденция короля.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Франция -->
+    <div id="modal-france" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Франция</h2>
+            <div class="modal-description">
+                <p>Париж, Лувр, Эйфелева башня, французская кухня.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQPAR1?marker=704140.france_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Франция&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://travelata.ru/search?marker=704140&subid=france_tours" target="_blank" class="quick-btn">🌴 Туры</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Париж</h4>
+                    <p class="city-description">Столица, Эйфелева башня, Лувр</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQPAR1?marker=704140.paris_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Лион</h4>
+                    <p class="city-description">Гастрономическая столица</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQLYS1?marker=704140.lyon_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Марсель</h4>
+                    <p class="city-description">Старый порт, средиземноморье</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQMRS1?marker=704140.marseille_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Эйфелева башня</strong>
+                    <p>Символ Парижа.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Лувр</strong>
+                    <p>Крупнейший художественный музей.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Германия -->
+    <div id="modal-germany" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Германия</h2>
+            <div class="modal-description">
+                <p>Берлин, Мюнхен, Гамбург, средневековые замки.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQBER1?marker=704140.germany_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Германия&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Берлин</h4>
+                    <p class="city-description">Столица, Бранденбургские ворота</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQBER1?marker=704140.berlin_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Мюнхен</h4>
+                    <p class="city-description">Октоберфест, замки</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQMUC1?marker=704140.munich_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Гамбург</h4>
+                    <p class="city-description">Порт, эльба</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQHAM1?marker=704140.hamburg_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Чехия -->
+    <div id="modal-czech" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Чехия</h2>
+            <div class="modal-description">
+                <p>Прага, Карловы Вары, пиво, средневековая архитектура.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQPRG1?marker=704140.czech_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Чехия&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Прага</h4>
+                    <p class="city-description">Столица, Карлов мост, замок</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQPRG1?marker=704140.prague_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Карловы Вары</h4>
+                    <p class="city-description">Знаменитый курорт</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQKLV1?marker=704140.karlovy_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Великобритания -->
+    <div id="modal-uk" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Великобритания</h2>
+            <div class="modal-description">
+                <p>Лондон, Манчестер, Эдинбург, королевская история.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQLON1?marker=704140.uk_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Великобритания&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Лондон</h4>
+                    <p class="city-description">Столица, Биг-Бен, Тауэр</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQLON1?marker=704140.london_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Эдинбург</h4>
+                    <p class="city-description">Старая столица Шотландии</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQEDI1?marker=704140.edinburgh_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Япония -->
+    <div id="modal-japan" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Япония</h2>
+            <div class="modal-description">
+                <p>Токио, Киото, Осака, традиции и технологии.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQTYO1?marker=704140.japan_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Япония&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Токио</h4>
+                    <p class="city-description">Столица, небоскрёбы</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQTYO1?marker=704140.tokyo_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Киото</h4>
+                    <p class="city-description">Древняя столица, храмы</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQKYO1?marker=704140.kyoto_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Осака</h4>
+                    <p class="city-description">Еда, замок</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQOSA1?marker=704140.osaka_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Китай -->
+    <div id="modal-china" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Китай</h2>
+            <div class="modal-description">
+                <p>Пекин, Шанхай, Гонконг, Великая стена.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQPEK1?marker=704140.china_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Китай&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Пекин</h4>
+                    <p class="city-description">Столица, Запретный город</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQPEK1?marker=704140.beijing_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Шанхай</h4>
+                    <p class="city-description">Деловой центр</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQSHA1?marker=704140.shanghai_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Канада -->
+    <div id="modal-canada" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Канада</h2>
+            <div class="modal-description">
+                <p>Торонто, Ванкувер, Монреаль, природа.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.aviasales.by/search/MSQYTO1?marker=704140.canada_flights" target="_blank" class="quick-btn">✈️ Авиабилеты</a>
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Канада&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+                <a href="https://c.travelpayouts.com/click?shmarker=704140" target="_blank" class="quick-btn">🛡️ Страховка</a>
+            </div>
+            <h3>Популярные города</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Торонто</h4>
+                    <p class="city-description">Крупнейший город</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQYTO1?marker=704140.toronto_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Ванкувер</h4>
+                    <p class="city-description">Горы и океан</p>
+                    <div class="transport-icons">
+                        <a href="https://www.aviasales.by/search/MSQYVR1?marker=704140.vancouver_flight" target="_blank">✈️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНЫЕ ОКНА ДЛЯ РЕГИОНОВ БЕЛАРУСИ (ТОЛЬКО ОТЕЛИ) ===== -->
+    <!-- Минская область -->
+    <div id="modal-minsk-region" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Минская область</h2>
+            <div class="modal-description">
+                <p>Центральный регион Беларуси. Здесь находятся столица Минск, знаменитые замки Несвижа и Мира, живописные усадьбы и парки.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Минская+область&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Города и достопримечательности</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Минск</h4>
+                    <p class="city-description">Столица Беларуси</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Минск" target="_blank" title="Ж/д билеты">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Минск" target="_blank" title="Автобусные билеты">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Несвиж</h4>
+                    <p class="city-description">Замок Радзивиллов</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Несвиж" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Несвиж" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Мир</h4>
+                    <p class="city-description">Мирский замок</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Мир" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Мир" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Заславль</h4>
+                    <p class="city-description">Древний город</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Заславль" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Заславль" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Несвижский замок</strong>
+                    <p>Резиденция князей Радзивиллов, объект ЮНЕСКО.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Мирский замок</strong>
+                    <p>Замково-парковый комплекс XVI века, объект ЮНЕСКО.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Брестская область -->
+    <div id="modal-brest-region" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Брестская область</h2>
+            <div class="modal-description">
+                <p>Юго-западный регион с уникальными памятниками: Брестская крепость, Беловежская пуща, древние города.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Брестская+область&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Города и достопримечательности</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Брест</h4>
+                    <p class="city-description">Город-герой, крепость</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Брест" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Брест" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Каменец</h4>
+                    <p class="city-description">Каменецкая башня</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Каменец" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Каменец" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Пинск</h4>
+                    <p class="city-description">Старинный город на Полесье</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Пинск" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Пинск" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Брестская крепость</strong>
+                    <p>Мемориальный комплекс, символ мужества.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Беловежская пуща</strong>
+                    <p>Реликтовый лес, объект ЮНЕСКО, зубры.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Витебская область -->
+    <div id="modal-vitebsk-region" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Витебская область</h2>
+            <div class="modal-description">
+                <p>Северный край с живописными озёрами, древним Полоцком и культурной столицей Витебском.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Витебская+область&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Города и достопримечательности</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Витебск</h4>
+                    <p class="city-description">Культурная столица, фестиваль «Славянский базар»</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Витебск" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Витебск" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Полоцк</h4>
+                    <p class="city-description">Древнейший город, Софийский собор</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Полоцк" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Полоцк" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Браслав</h4>
+                    <p class="city-description">Центр Браславских озёр</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Браслав" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Браслав" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Софийский собор</strong>
+                    <p>Древнейший храм Беларуси.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Браславские озёра</strong>
+                    <p>Живописный край для отдыха.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Гродненская область -->
+    <div id="modal-grodno-region" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Гродненская область</h2>
+            <div class="modal-description">
+                <p>Западный регион с богатой историей: Гродно, Лидский замок, Августовский канал.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Гродненская+область&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Города и достопримечательности</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Гродно</h4>
+                    <p class="city-description">Старый и Новый замки, Коложа</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Гродно" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Гродно" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Лида</h4>
+                    <p class="city-description">Лидский замок</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Лида" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Лида" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Новогрудок</h4>
+                    <p class="city-description">Руины замка, дом Мицкевича</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Новогрудок" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Новогрудок" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+            <h3>Достопримечательности</h3>
+            <div class="modal-highlights">
+                <div class="modal-highlight">
+                    <strong>Старый замок</strong>
+                    <p>Резиденция литовских князей.</p>
+                </div>
+                <div class="modal-highlight">
+                    <strong>Коложская церковь</strong>
+                    <p>Уникальный памятник XII века.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Могилёвская область -->
+    <div id="modal-mogilev-region" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Могилёвская область</h2>
+            <div class="modal-description">
+                <p>Восточный регион с интересными городами Могилёв, Мстиславль и дворцами.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Могилёвская+область&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Города и достопримечательности</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Могилёв</h4>
+                    <p class="city-description">Ратуша, площадь Звёзд</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Могилёв" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Могилёв" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Мстиславль</h4>
+                    <p class="city-description">Древний город, руины замка</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Мстиславль" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Мстиславль" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Гомельская область -->
+    <div id="modal-gomel-region" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Гомельская область</h2>
+            <div class="modal-description">
+                <p>Юго-восток с красивейшим дворцом Паскевичей, Припятским Полесьем и древним Туровом.</p>
+            </div>
+            <div class="quick-actions">
+                <a href="https://www.booking.com/searchresults.ru.html?ss=Гомельская+область&aid=704140" target="_blank" class="quick-btn">🏨 Отели</a>
+            </div>
+            <h3>Города и достопримечательности</h3>
+            <div class="modal-cities">
+                <div class="modal-city">
+                    <h4>Гомель</h4>
+                    <p class="city-description">Дворец Румянцевых-Паскевичей</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Гомель" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Гомель" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Туров</h4>
+                    <p class="city-description">Древний крест, Туровское Евангелие</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Туров" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Туров" target="_blank">🚌</a>
+                    </div>
+                </div>
+                <div class="modal-city">
+                    <h4>Мозырь</h4>
+                    <p class="city-description">Город над Припятью</p>
+                    <div class="transport-icons">
+                        <a href="https://www.tutu.ru/poezda/search.php?from=Минск&to=Мозырь" target="_blank">🚆</a>
+                        <a href="https://bus.tutu.ru/search.php?from=Минск&to=Мозырь" target="_blank">🚌</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/main.js"></script>
+    <script>
+        // Массив данных для безвизовых направлений
+        const visaFreeCountries = [
+            { id: 'turkey', name: 'Турция', img: 'turkey.jpg', desc: 'Пляжный отдых, отели all inclusive, экскурсии в Стамбул и Каппадокию.', price: 'от 750 BYN' },
+            { id: 'egypt', name: 'Египет', img: 'egypt.jpg', desc: 'Красное море, дайвинг, пирамиды Гизы, Каир.', price: 'от 900 BYN' },
+            { id: 'georgia', name: 'Грузия', img: 'georgia.jpg', desc: 'Тбилиси, вино, горы, гостеприимство, кухня.', price: 'от 650 BYN' },
+            { id: 'serbia', name: 'Сербия', img: 'serbia.jpg', desc: 'Белград, Нови-Сад, крепости.', price: 'от 800 BYN' },
+            { id: 'montenegro', name: 'Черногория', img: 'montenegro.jpg', desc: 'Котор, Будва, Дурмитор, Адриатическое море.', price: 'от 950 BYN' },
+            { id: 'azerbaijan', name: 'Азербайджан', img: 'azerbaijan.jpg', desc: 'Баку, Шеки, Габала.', price: 'от 700 BYN' },
+            { id: 'kazakhstan', name: 'Казахстан', img: 'kazakhstan.jpg', desc: 'Алматы, Астана, Чарын.', price: 'от 550 BYN' },
+            { id: 'uzbekistan', name: 'Узбекистан', img: 'uzbekistan.jpg', desc: 'Самарканд, Бухара, Хива.', price: 'от 600 BYN' },
+            { id: 'thailand', name: 'Таиланд', img: 'thailand.jpg', desc: 'Пхукет, Паттайя, Бангкок.', price: 'от 1200 BYN' },
+            { id: 'maldives', name: 'Мальдивы', img: 'maldives.jpg', desc: 'Мале, атоллы.', price: 'от 2500 BYN' },
+            { id: 'uae', name: 'ОАЭ', img: 'uae.jpg', desc: 'Дубай, Абу-Даби, Шарджа.', price: 'от 1500 BYN' },
+            { id: 'karelia', name: 'Карелия', img: 'karelia.jpg', desc: 'Петрозаводск, Кижи, Валаам.', price: 'от 350 BYN' }
+        ];
+
+        // Массив для визовых стран
+        const visaCountries = [
+            { id: 'italy', name: 'Италия', img: 'italy.jpg', desc: 'Рим, Венеция, Флоренция, Милан.', price: 'от 1200 BYN' },
+            { id: 'spain', name: 'Испания', img: 'spain.jpg', desc: 'Мадрид, Барселона, Валенсия.', price: 'от 1100 BYN' },
+            { id: 'france', name: 'Франция', img: 'france.jpg', desc: 'Париж, Лион, Марсель.', price: 'от 1300 BYN' },
+            { id: 'germany', name: 'Германия', img: 'germany.jpg', desc: 'Берлин, Мюнхен, Гамбург.', price: 'от 1000 BYN' },
+            { id: 'czech', name: 'Чехия', img: 'czech.jpg', desc: 'Прага, Карловы Вары.', price: 'от 850 BYN' },
+            { id: 'uk', name: 'Великобритания', img: 'uk.jpg', desc: 'Лондон, Манчестер.', price: 'от 1400 BYN' },
+            { id: 'japan', name: 'Япония', img: 'japan.jpg', desc: 'Токио, Киото, Осака.', price: 'от 2000 BYN' },
+            { id: 'china', name: 'Китай', img: 'china.jpg', desc: 'Пекин, Шанхай, Гонконг.', price: 'от 1500 BYN' },
+            { id: 'canada', name: 'Канада', img: 'canada.jpg', desc: 'Торонто, Ванкувер.', price: 'от 2200 BYN' }
+        ];
+
+        // Массив для регионов Беларуси
+        const belarusRegions = [
+            { id: 'minsk-region', name: 'Минская область', img: 'minsk-region.jpg', desc: 'Центральный регион, замки Несвижа и Мира.', price: 'Экскурсии от 50 BYN' },
+            { id: 'brest-region', name: 'Брестская область', img: 'brest-region.jpg', desc: 'Брестская крепость, Беловежская пуща.', price: 'Экскурсии от 55 BYN' },
+            { id: 'vitebsk-region', name: 'Витебская область', img: 'vitebsk-region.jpg', desc: 'Браславские озёра, Полоцк, Витебск.', price: 'Экскурсии от 50 BYN' },
+            { id: 'grodno-region', name: 'Гродненская область', img: 'grodno-region.jpg', desc: 'Коложа, Старый замок, Лидский замок.', price: 'Экскурсии от 50 BYN' },
+            { id: 'mogilev-region', name: 'Могилёвская область', img: 'mogilev-region.jpg', desc: 'Могилёв, Мстиславль, дворцы.', price: 'Экскурсии от 45 BYN' },
+            { id: 'gomel-region', name: 'Гомельская область', img: 'gomel-region.jpg', desc: 'Дворец Паскевичей, Припятское Полесье.', price: 'Экскурсии от 45 BYN' }
+        ];
+
+        // Функция для создания карточки (для безвизовых, визовых и регионов)
+        function createCountryCard(item, isVisa = false, isRegion = false) {
+            const card = document.createElement('div');
+            card.className = 'country-card';
+            card.setAttribute('data-modal', item.id);
+            let title = item.name;
+            if (isVisa) title += ' <span class="visa-badge">виза</span>';
+            card.innerHTML = `
+                <img src="../images/${item.img}" alt="${item.name}" class="country-img" loading="lazy">
+                <div class="country-content">
+                    <h3 class="country-title">${title}</h3>
+                    <p>${item.desc}</p>
+                    <div class="card-footer">
+                        <span class="card-price">${item.price}</span>
+                        <span class="card-btn">Подробнее</span>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Заполняем безвизовые карточки
+        const visaFreeGrid = document.getElementById('visa-free-grid');
+        visaFreeCountries.forEach(c => {
+            visaFreeGrid.appendChild(createCountryCard(c, false));
+        });
+
+        // Заполняем визовые карточки
+        const visaGrid = document.getElementById('visa-grid');
+        visaCountries.forEach(c => {
+            visaGrid.appendChild(createCountryCard(c, true));
+        });
+
+        // Заполняем карточки регионов Беларуси
+        const belarusGrid = document.getElementById('belarus-grid');
+        belarusRegions.forEach(r => {
+            belarusGrid.appendChild(createCountryCard(r, false, true));
+        });
+
+        // Логика модальных окон
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+        const countryCards = document.querySelectorAll('[data-modal]');
+
+        countryCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const modalId = this.getAttribute('data-modal');
+                const modal = document.getElementById('modal-' + modalId);
+                if (modal) {
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        window.addEventListener('click', function(e) {
+            modals.forEach(modal => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
